@@ -3,6 +3,7 @@ package org.najoa.demo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.najoa.configs.EnvManager;
+import org.najoa.configs.LocatorConfig;
 import org.najoa.configs.WebDriverSetup;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
@@ -26,6 +27,7 @@ public class SimpleTest {
     public void setUp() {
         logTest();
         envTest();
+        locatorTest();
         // Initialize WebDriver (ChromeDriver in this case)
         driver = WebDriverSetup.initializeDriver();
 
@@ -91,5 +93,12 @@ public class SimpleTest {
         logger.info("EnvManager.get(\"BASE_URL\"): " + EnvManager.get("BASE_URL"));
         // logger.error("EnvManager.get(\"BASE_URL_\"): " + EnvManager.get("BASE_URL_"));
         logger.warn("EnvManager.get(\"BASE_URL_\", \"default_url\"): " + EnvManager.get("BASE_URL_", "default url"));
+    }
+
+    private void locatorTest(){
+        logger.info(LocatorConfig.getLocator("login.usernameField"));
+        logger.info(LocatorConfig.getLocator("demo_app.login.usernameField"));
+        logger.info(LocatorConfig.getLocator("login.passwordField"));
+        logger.info(LocatorConfig.getLocator("login.loginButton"));
     }
 }
