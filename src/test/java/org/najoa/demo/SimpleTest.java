@@ -2,7 +2,8 @@ package org.najoa.demo;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.najoa.WebDriverSetup;
+import org.najoa.configs.EnvManager;
+import org.najoa.configs.WebDriverSetup;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -24,6 +25,7 @@ public class SimpleTest {
     @BeforeTest
     public void setUp() {
         logTest();
+        envTest();
         // Initialize WebDriver (ChromeDriver in this case)
         driver = WebDriverSetup.initializeDriver();
 
@@ -83,5 +85,11 @@ public class SimpleTest {
         logger.info("Testing logging...");
         logger.warn("Testing logging...");
         logger.error("Testing logging...");
+    }
+
+    private void envTest(){
+        logger.info("EnvManager.get(\"BASE_URL\"): " + EnvManager.get("BASE_URL"));
+        // logger.error("EnvManager.get(\"BASE_URL_\"): " + EnvManager.get("BASE_URL_"));
+        logger.warn("EnvManager.get(\"BASE_URL_\", \"default_url\"): " + EnvManager.get("BASE_URL_", "default url"));
     }
 }

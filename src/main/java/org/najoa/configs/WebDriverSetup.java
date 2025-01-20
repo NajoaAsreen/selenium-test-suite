@@ -1,4 +1,4 @@
-package org.najoa;
+package org.najoa.configs;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
