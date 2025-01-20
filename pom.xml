@@ -25,6 +25,16 @@
       <scope>test</scope>
     </dependency>
 
+    <!-- ExtentReports https://extentreports.com/docs/versions/5/java/index.html-->
+    <!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
+    <dependency>
+      <groupId>com.aventstack</groupId>
+      <artifactId>extentreports</artifactId>
+      <version>5.1.2</version>
+    </dependency>
+
+
+
     <!-- WebDriverManager to manage browser drivers -->
     <!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
     <dependency>
@@ -77,4 +87,5 @@
     </dependency>
 
   </dependencies>
+
 </project>
