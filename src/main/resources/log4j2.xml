@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<Configuration status="trace">-->
+<Configuration status="error">
+    <Properties>
+        <!-- Define the base path as the 'logs' directory in the project root -->
+        <Property name="basePath">logs</Property>
+    </Properties>
+
+    <Appenders>
+        <!-- RollingFile Appender -->
+        <RollingFile name="fileLogger"
+                     fileName="${basePath}/SeleniumTestSuite.log"
+                     filePattern="${basePath}/SeleniumTestSuite-%d{yyyy-MM-dd}.log.%i">
+            <PatternLayout>
+                <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <!-- Rotate file if it exceeds 10MB -->
+                <SizeBasedTriggeringPolicy size="10MB" />
+                <!-- Rotate file daily -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+            <DefaultRolloverStrategy max="10">
+                <Delete basePath="${basePath}" maxDepth="1">
+                    <!-- Delete files older than 10 days -->
+                    <IfLastModified age="10d" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <!-- Root Logger -->
+        <!-- ALL, TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF -->
+        <Root level="INFO" additivity="false">
+            <AppenderRef ref="fileLogger" />
+        </Root>
+    </Loggers>
+</Configuration>

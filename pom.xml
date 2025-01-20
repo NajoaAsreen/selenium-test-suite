@@ -33,6 +33,41 @@
       <version>5.9.2</version>
     </dependency>
 
+    <!-- Logging -->
+    <!-- Log4j Core -->
+    <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>2.24.3</version>
+    </dependency>
+
+    <!-- Log4j API -->
+    <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>2.24.3</version>
+    </dependency>
+
+
+    <!-- Log4j SLF4J Binding -->
+    <!-- If latest version slf4j2-impl is being used its getting warning so using the old one slf4j-impl-->
+<!--    https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j2-impl &ndash;&gt;-->
+<!--    <dependency>-->
+<!--      <groupId>org.apache.logging.log4j</groupId>-->
+<!--      <artifactId>log4j-slf4j2-impl</artifactId>-->
+<!--      <version>2.24.3</version>-->
+<!--    </dependency>-->
+    <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl -->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-slf4j-impl</artifactId>
+      <version>2.24.3</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Logging END -->
 
     <dependency>
       <groupId>junit</groupId>
@@ -40,5 +75,6 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+
   </dependencies>
 </project>
