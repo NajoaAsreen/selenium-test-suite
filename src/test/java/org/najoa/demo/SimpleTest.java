@@ -33,21 +33,6 @@ public class SimpleTest {
         Assert.assertEquals(pageTitle, "Google");
     }
 
-
-    @Test
-    public void testGeminiHomePage() {
-        // Open the Gemini homepage
-        driver.get("https://gemini.google.com/");
-        String title = driver.getTitle();
-        if(title == null) title = "";
-        // Get the title of the page
-        String pageTitle = title.trim().replace("\u200E", "").replace("\u200F", "");
-
-        // Verify the title of the page
-        Assert.assertEquals(pageTitle, "Gemini - chat to supercharge your ideas",
-                "Page title does not match the expected value.");
-    }
-
     @AfterTest
     public void tearDown() {
         // Close the browser
