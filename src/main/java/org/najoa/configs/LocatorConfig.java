@@ -2,14 +2,11 @@ package org.najoa.configs;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Properties;
+import java.util.*;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class LocatorConfig {
     private static final Logger logger = LogManager.getLogger(LocatorConfig.class);
