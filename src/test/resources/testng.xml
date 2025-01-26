@@ -9,15 +9,21 @@
 <!--    </test>-->
 <!--</suite>-->
 
+<!-- Nested Package Level -->
 <suite name="Demo Test Suite" parallel="tests" thread-count="2">
     <test name="DemoApp Tests">
         <packages>
             <package name="org.najoa.demoapp"/> <!-- Package 1 -->
         </packages>
     </test>
+
     <test name="DemoApp2 Tests">
         <packages>
-            <package name="org.najoa.demoapp2"/> <!-- Package 2 -->
+            <!-- Specify multiple packages here -->
+            <!-- <package name="org.najoa.demoapp2.module1"/> &lt;!&ndash; Package 1 &ndash;&gt;-->
+            <!-- <package name="org.najoa.demoapp2.module2"/> &lt;!&ndash; Package 2 &ndash;&gt;-->
+            <!-- You can use wildcards for all sub-packages -->
+            <package name="org.najoa.demoapp2.*"/> <!-- All sub-packages in demoapp2 -->
         </packages>
     </test>
 </suite>

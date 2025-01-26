@@ -1,4 +1,4 @@
-package org.najoa.demoapp2;
+package org.najoa.demoapp2.module1;
 
 import com.aventstack.extentreports.ExtentTest;
 import org.apache.logging.log4j.LogManager;
@@ -26,7 +26,7 @@ public class TestExtentReports {
 
         // Define project and module
         String projectName = "DemoApp2";
-        String moduleName = "Login2";
+        String moduleName = "Module 1";
 
         // Get parent (module) test
         loginParent = ExtentManager.getModuleParent(projectName, moduleName);
