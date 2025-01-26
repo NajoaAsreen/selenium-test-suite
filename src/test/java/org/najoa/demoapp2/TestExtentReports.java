@@ -1,5 +1,6 @@
-package org.najoa.demo;
+package org.najoa.demoapp2;
 
+import com.aventstack.extentreports.ExtentTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.najoa.configs.ExtentManager;
@@ -7,12 +8,10 @@ import org.najoa.configs.WebDriverSetup;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.ITestResult;
-//import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import com.aventstack.extentreports.ExtentTest;
 
 public class TestExtentReports {
     private static final Logger logger = LogManager.getLogger(TestExtentReports.class);
@@ -26,33 +25,33 @@ public class TestExtentReports {
         WebDriverSetup.initializeDriver();
 
         // Define project and module
-        String projectName = "Demo";
-        String moduleName = "Login";
+        String projectName = "DemoApp2";
+        String moduleName = "Login2";
 
         // Get parent (module) test
         loginParent = ExtentManager.getModuleParent(projectName, moduleName);
     }
 
     @Test
-    public void testGoogleHomePage() {
+    public void testYoutubeHomePage() {
         // WebDriverSetup.initializeDriver();
         // Log the current thread ID to verify parallel execution
-        logger.info("Test Google HomePage is running on ThreadId: " + Thread.currentThread().getId());
+        logger.info("Test Youtube HomePage is running on ThreadId: " + Thread.currentThread().getId());
 
         // Get the WebDriver instance for the current thread
         WebDriver driver = WebDriverSetup.getDriver();
 
         // Create child node for this test
-        ExtentTest childNode = loginParent.createNode("Test Google HomePage");
+        ExtentTest childNode = loginParent.createNode("Test Youtube HomePage");
         ExtentManager.setTestNode(childNode);
 
-        driver.get("https://www.google.com");
-        childNode.info("Navigating to Google");
+        driver.get("https://www.youtube.com");
+        childNode.info("Navigating to Youtube");
 
         String pageTitle = driver.getTitle();
         childNode.info("Page Title: " + pageTitle);
 
-        Assert.assertEquals(pageTitle, "Google");
+        Assert.assertEquals(pageTitle, "YouTube");
     }
 
     @Test

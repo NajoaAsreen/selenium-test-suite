@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<suite name="Demo Test Suite" parallel="methods" thread-count="2">
-    <test name="Test Google HomePage and OpenAI HomePage">
-        <classes>
-            <class name="org.najoa.demo.TestExtentReports"/>
-        </classes>
+
+<!-- Method Level -->
+<!--<suite name="Demo Test Suite" parallel="methods" thread-count="2">-->
+<!--    <test name="Test Google HomePage and OpenAI HomePage">-->
+<!--        <classes>-->
+<!--            <class name="org.najoa.demo.TestExtentReports"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--</suite>-->
+
+<suite name="Demo Test Suite" parallel="tests" thread-count="2">
+    <test name="DemoApp Tests">
+        <packages>
+            <package name="org.najoa.demoapp"/> <!-- Package 1 -->
+        </packages>
+    </test>
+    <test name="DemoApp2 Tests">
+        <packages>
+            <package name="org.najoa.demoapp2"/> <!-- Package 2 -->
+        </packages>
     </test>
 </suite>

@@ -1,5 +1,6 @@
-package org.najoa.demo;
+package org.najoa.demoapp;
 
+import com.aventstack.extentreports.ExtentTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.najoa.configs.ExtentManager;
@@ -7,12 +8,10 @@ import org.najoa.configs.WebDriverSetup;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.ITestResult;
-//import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import com.aventstack.extentreports.ExtentTest;
 
 public class TestExtentReports {
     private static final Logger logger = LogManager.getLogger(TestExtentReports.class);
@@ -26,7 +25,7 @@ public class TestExtentReports {
         WebDriverSetup.initializeDriver();
 
         // Define project and module
-        String projectName = "Demo";
+        String projectName = "DemoApp";
         String moduleName = "Login";
 
         // Get parent (module) test
