@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Demo Test Suite" parallel="methods" thread-count="2">
+    <test name="Test Google HomePage and OpenAI HomePage">
+        <classes>
+            <class name="org.najoa.demo.TestExtentReports"/>
+        </classes>
+    </test>
+</suite>

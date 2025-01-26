@@ -21,7 +21,6 @@ public class SimpleTest {
     private WebDriver driver;
     private ExtentReports extentReports;
     private ExtentTest extentTest;
-    private ExtentSparkReporter extentSparkReporter;
 
     @BeforeTest
     public void setUp() {
@@ -32,7 +31,7 @@ public class SimpleTest {
         driver = WebDriverSetup.initializeDriver();
 
         // Initialize ExtentReports and ExtentSparkReporter
-        extentSparkReporter = new ExtentSparkReporter("reports/extentReport.html");
+        ExtentSparkReporter extentSparkReporter = new ExtentSparkReporter("reports/ExtentReport.html");
         extentReports = new ExtentReports();
         extentReports.attachReporter(extentSparkReporter);
 

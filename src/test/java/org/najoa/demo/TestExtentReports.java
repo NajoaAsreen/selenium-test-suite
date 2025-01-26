@@ -1,5 +1,7 @@
 package org.najoa.demo;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.najoa.configs.ExtentManager;
 import org.najoa.configs.WebDriverSetup;
 import org.openqa.selenium.WebDriver;
@@ -13,13 +15,15 @@ import org.testng.annotations.Test;
 import com.aventstack.extentreports.ExtentTest;
 
 public class TestExtentReports {
-    private WebDriver driver;
+    private static final Logger logger = LogManager.getLogger(TestExtentReports.class);
     private ExtentTest loginParent;
 
     @BeforeTest
     public void setUp() {
-        // Initialize WebDriver
-        driver = WebDriverSetup.initializeDriver();
+        logger.info("Setting Up TestExtentReports ThreadId: " + Thread.currentThread().getId());
+
+        // Initialize WebDriver for each thread
+        // WebDriver driver = WebDriverSetup.initializeDriver();
 
         // Define project and module
         String projectName = "Demo";
@@ -31,6 +35,13 @@ public class TestExtentReports {
 
     @Test
     public void testGoogleHomePage() {
+        WebDriverSetup.initializeDriver();
+        // Log the current thread ID to verify parallel execution
+        logger.info("Test Google HomePage is running on ThreadId: " + Thread.currentThread().getId());
+
+        // Get the WebDriver instance for the current thread
+        WebDriver driver = WebDriverSetup.getDriver();
+
         // Create child node for this test
         ExtentTest childNode = loginParent.createNode("Test Google HomePage");
         ExtentManager.setTestNode(childNode);
@@ -46,6 +57,13 @@ public class TestExtentReports {
 
     @Test
     public void testOpenAiHomePage() {
+        WebDriverSetup.initializeDriver();
+        // Log the current thread ID to verify parallel execution
+        logger.info("Test OpenAI HomePage is running on ThreadId: " + Thread.currentThread().getId());
+
+        // Get the WebDriver instance for the current thread
+        WebDriver driver = WebDriverSetup.getDriver();
+
         // Create child node for this test
         ExtentTest childNode = loginParent.createNode("Test OpenAI HomePage");
         ExtentManager.setTestNode(childNode);
@@ -84,9 +102,8 @@ public class TestExtentReports {
 
     @AfterTest
     public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
+        // Quit WebDriver after all tests are done
+        WebDriverSetup.quitDriver();
         ExtentManager.flushAllReports();
     }
 }
