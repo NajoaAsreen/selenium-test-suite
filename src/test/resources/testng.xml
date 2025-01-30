@@ -10,20 +10,26 @@
 <!--</suite>-->
 
 <!-- Nested Package Level -->
-<suite name="Demo Test Suite" parallel="tests" thread-count="2">
-    <test name="DemoApp Tests">
-        <packages>
-            <package name="org.najoa.demoapp"/> <!-- Package 1 -->
-        </packages>
-    </test>
+<suite name="Selenium Test Suite" parallel="tests" thread-count="2">
+<!--    <test name="DemoApp Tests">-->
+<!--        <packages>-->
+<!--            <package name="org.najoa.demoapp"/> &lt;!&ndash; Package 1 &ndash;&gt;-->
+<!--        </packages>-->
+<!--    </test>-->
 
-    <test name="DemoApp2 Tests">
+<!--    <test name="DemoApp2 Tests">-->
+<!--        <packages>-->
+<!--            &lt;!&ndash; Specify multiple packages here &ndash;&gt;-->
+<!--            &lt;!&ndash; <package name="org.najoa.demoapp2.module1"/> &lt;!&ndash; Package 1 &ndash;&gt;&ndash;&gt;-->
+<!--            &lt;!&ndash; <package name="org.najoa.demoapp2.module2"/> &lt;!&ndash; Package 2 &ndash;&gt;&ndash;&gt;-->
+<!--            &lt;!&ndash; You can use wildcards for all sub-packages &ndash;&gt;-->
+<!--            <package name="org.najoa.demoapp2.*"/> &lt;!&ndash; All sub-packages in demoapp2 &ndash;&gt;-->
+<!--        </packages>-->
+<!--    </test>-->
+
+    <test name="ReqBuilderFE Tests">
         <packages>
-            <!-- Specify multiple packages here -->
-            <!-- <package name="org.najoa.demoapp2.module1"/> &lt;!&ndash; Package 1 &ndash;&gt;-->
-            <!-- <package name="org.najoa.demoapp2.module2"/> &lt;!&ndash; Package 2 &ndash;&gt;-->
-            <!-- You can use wildcards for all sub-packages -->
-            <package name="org.najoa.demoapp2.*"/> <!-- All sub-packages in demoapp2 -->
+            <package name="org.najoa.reqbuilderfe.*"/>
         </packages>
     </test>
 </suite>
