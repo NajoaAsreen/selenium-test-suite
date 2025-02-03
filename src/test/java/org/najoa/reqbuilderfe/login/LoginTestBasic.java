@@ -20,17 +20,19 @@ import java.time.Duration;
 public class LoginTestBasic {
     private static final Logger logger = LogManager.getLogger(LoginTestBasic.class);
     private ExtentTest loginParent;
+    private String projectName;
 
     @BeforeMethod
     public void setUp() {
-        logger.info("Setting Up LoginTestBasic ThreadId: " + Thread.currentThread().getId());
+        // Define project and module
+        projectName = EnvManager.get("PROJECT_REQ_BUILDER_FE_NAME");
+        String moduleName = "LoginBasic";
+        logger.info(projectName+": "+"Setting Up LoginTestBasic ThreadId: " + Thread.currentThread().getId());
 
         // Initialize WebDriver for each thread
         WebDriverSetup.initializeDriver();
 
-        // Define project and module
-        String projectName = EnvManager.get("PROJECT_REQ_BUILDER_FE_NAME");
-        String moduleName = "LoginBasic";
+
 
         // Get parent (module) test
         loginParent = ExtentManager.getModuleParent(projectName, moduleName);
@@ -38,7 +40,7 @@ public class LoginTestBasic {
 
     @Test
     public void testValidLogin() {
-        logger.info("Executing testValidLogin on ThreadId: " + Thread.currentThread().getId());
+        logger.info(projectName+": "+"Executing testValidLogin on ThreadId: " + Thread.currentThread().getId());
 
         WebDriver driver = WebDriverSetup.getDriver();
         ExtentTest childNode = loginParent.createNode("Test Valid Login");
@@ -93,6 +95,7 @@ public class LoginTestBasic {
         if (childNode != null) {
             switch (result.getStatus()) {
                 case ITestResult.FAILURE:
+                    logger.error(projectName + ": " + result.getName() + ": is running on ThreadId: " + Thread.currentThread().getId() + " - " + result.getThrowable());
                     childNode.fail(result.getThrowable()); // Log exception details
                     break;
                 case ITestResult.SUCCESS:

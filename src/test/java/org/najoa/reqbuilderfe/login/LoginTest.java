@@ -21,17 +21,20 @@ public class LoginTest {
     private static final Logger logger = LogManager.getLogger(LoginTest.class);
     private ExtentTest loginParent;
 
+    private String projectName;
+
     // @BeforeTest
     @BeforeMethod
     public void setUp() {
-        logger.info("Setting Up LoginTest ThreadId: " + Thread.currentThread().getId());
+        // Define project and module
+        projectName = EnvManager.get("PROJECT_REQ_BUILDER_FE_NAME");
+        String moduleName = "Login";
+        logger.info(projectName+": "+ "Setting Up LoginTest ThreadId: " + Thread.currentThread().getId());
 
         // Initialize WebDriver for each thread
         WebDriverSetup.initializeDriver();
 
-        // Define project and module
-        String projectName = EnvManager.get("PROJECT_REQ_BUILDER_FE_NAME");
-        String moduleName = "Login";
+
 
         // Get parent (module) test
         loginParent = ExtentManager.getModuleParent(projectName, moduleName);
@@ -39,7 +42,7 @@ public class LoginTest {
 
     @Test
     public void testValidLogin() {
-        logger.info("Executing testValidLogin on ThreadId: " + Thread.currentThread().getId());
+        logger.info(projectName+": "+ "Executing testValidLogin on ThreadId: " + Thread.currentThread().getId());
 
         WebDriver driver = WebDriverSetup.getDriver();
         ExtentTest childNode = loginParent.createNode("Test Valid Login");
@@ -49,7 +52,7 @@ public class LoginTest {
         String loginUrl = EnvManager.get("PROJECT_REQ_BUILDER_FE_URI");
         driver.get(loginUrl);
         childNode.info("Navigating to: " + loginUrl);
-        logger.info("Navigating to: " + loginUrl);
+        logger.info(projectName+": "+ "Navigating to: " + loginUrl);
 
         // Get locators
         By usernameField = LocatorConfig.getLocator("reqbuilderfe.login.usernameField");
@@ -91,6 +94,7 @@ public class LoginTest {
         if (childNode != null) {
             switch (result.getStatus()) {
                 case ITestResult.FAILURE:
+                    logger.error(projectName + ": " + result.getName() + ": is running on ThreadId: " + Thread.currentThread().getId() + " - " + result.getThrowable());
                     childNode.fail(result.getThrowable()); // Log exception details
                     break;
                 case ITestResult.SUCCESS:

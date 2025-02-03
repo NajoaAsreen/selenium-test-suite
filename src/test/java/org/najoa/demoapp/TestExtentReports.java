@@ -3,6 +3,7 @@ package org.najoa.demoapp;
 import com.aventstack.extentreports.ExtentTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.najoa.configs.EnvManager;
 import org.najoa.configs.ExtentManager;
 import org.najoa.configs.WebDriverSetup;
 import org.openqa.selenium.WebDriver;
@@ -16,10 +17,12 @@ import org.testng.annotations.Test;
 public class TestExtentReports {
     private static final Logger logger = LogManager.getLogger(TestExtentReports.class);
     private ExtentTest loginParent;
+    private String projectName;
 
     @BeforeTest
     public void setUp() {
-        logger.info("Setting Up TestExtentReports ThreadId: " + Thread.currentThread().getId());
+        projectName = EnvManager.get("PROJECT_DEMO_APP_NAME");
+        logger.info(projectName+": "+"Setting Up TestExtentReports ThreadId: " + Thread.currentThread().getId());
 
         // Initialize WebDriver for each thread
         WebDriverSetup.initializeDriver();
@@ -36,7 +39,7 @@ public class TestExtentReports {
     public void testGoogleHomePage() {
         // WebDriverSetup.initializeDriver();
         // Log the current thread ID to verify parallel execution
-        logger.info("Test Google HomePage is running on ThreadId: " + Thread.currentThread().getId());
+        logger.info(projectName+": "+"Test Google HomePage is running on ThreadId: " + Thread.currentThread().getId());
 
         // Get the WebDriver instance for the current thread
         WebDriver driver = WebDriverSetup.getDriver();
@@ -58,7 +61,7 @@ public class TestExtentReports {
     public void testOpenAiHomePage() {
         // WebDriverSetup.initializeDriver();
         // Log the current thread ID to verify parallel execution
-        logger.info("Test OpenAI HomePage is running on ThreadId: " + Thread.currentThread().getId());
+        logger.info(projectName+": "+"Test OpenAI HomePage is running on ThreadId: " + Thread.currentThread().getId());
 
         // Get the WebDriver instance for the current thread
         WebDriver driver = WebDriverSetup.getDriver();
@@ -73,7 +76,7 @@ public class TestExtentReports {
         String pageTitle = driver.getTitle();
         childNode.info("Page Title: " + pageTitle);
 
-        Assert.assertEquals(pageTitle, "OpenAI");
+        Assert.assertEquals(pageTitle, "OpenAIs");
         // throw new SkipException("Skipping this test as it is not needed currently.");
     }
 
@@ -84,6 +87,8 @@ public class TestExtentReports {
         if (childNode != null) {
             switch (result.getStatus()) {
                 case ITestResult.FAILURE:
+                    logger.error(projectName + ": " + result.getName() + ": is running on ThreadId: " + Thread.currentThread().getId() + " - " + result.getThrowable());
+
                     childNode.fail(result.getThrowable()); // Log exception details
                     break;
                 case ITestResult.SUCCESS:
