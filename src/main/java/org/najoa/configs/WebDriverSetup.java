@@ -7,16 +7,15 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class WebDriverSetup {
     private static final ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<>();
 
+    // Initialize WebDriver only if not already created for the current thread
     public static WebDriver initializeDriver() {
-        // Use WebDriverManager to set up the ChromeDriver automatically
-        WebDriverManager.chromedriver().setup();
-
-        // Create a new WebDriver instance for each thread
-        WebDriver driver = new ChromeDriver();
-        threadLocalDriver.set(driver);
-
-        return driver;
-    }
+        if (threadLocalDriver.get() == null) {
+            WebDriverManager.chromedriver().setup();
+            WebDriver driver = new ChromeDriver();
+            threadLocalDriver.set(driver);
+        }
+        return threadLocalDriver.get();
+}
 
     public static WebDriver getDriver() {
         return threadLocalDriver.get();

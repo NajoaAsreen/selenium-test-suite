@@ -1,5 +1,4 @@
 package org.najoa.reqbuilderfe.login;
-
 import com.aventstack.extentreports.ExtentTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,38 +8,35 @@ import org.najoa.configs.LocatorConfig;
 import org.najoa.configs.WebDriverSetup;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 import java.time.Duration;
-
-public class LoginTest {
+@Test(groups = {"login"})
+public class LoginTest extends RequestBuilderFe {
     private static final Logger logger = LogManager.getLogger(LoginTest.class);
     private ExtentTest loginParent;
-
-    private String projectName;
 
     // @BeforeTest
     @BeforeMethod
     public void setUp() {
         // Define project and module
-        projectName = EnvManager.get("PROJECT_REQ_BUILDER_FE_NAME");
+        //projectName = EnvManager.get("PROJECT_REQ_BUILDER_FE_NAME");
         String moduleName = "Login";
-        logger.info(projectName+": "+ "Setting Up LoginTest ThreadId: " + Thread.currentThread().getId());
+        logger.info("{}: Before Method: Setting Up LoginTest ThreadId: {}", projectName, Thread.currentThread().getId());
 
         // Initialize WebDriver for each thread
         WebDriverSetup.initializeDriver();
-
-
 
         // Get parent (module) test
         loginParent = ExtentManager.getModuleParent(projectName, moduleName);
     }
 
-    @Test
+   @Test(priority = 1)
+   // @Test(groups = {"login"}, priority = 1)
     public void testValidLogin() {
         logger.info(projectName+": "+ "Executing testValidLogin on ThreadId: " + Thread.currentThread().getId());
 
@@ -86,35 +82,38 @@ public class LoginTest {
         Assert.assertTrue(urlContainsHome, "Login failed or incorrect redirection.");
         childNode.info("Login successful, redirected to home page");
     }
+    //@Test(groups = {"login"}, priority = 2)
+    @Test(priority = 2)
+    public void testValidLogout() {
+        logger.info(projectName+": "+ "Executing testValidLogout on ThreadId: " + Thread.currentThread().getId());
 
-    @AfterMethod
-    public void handleTestResult(ITestResult result) {
-        // Log test status to the child node (logging only once)
-        ExtentTest childNode = ExtentManager.getTestNode();
-        if (childNode != null) {
-            switch (result.getStatus()) {
-                case ITestResult.FAILURE:
-                    logger.error(projectName + ": " + result.getName() + ": is running on ThreadId: " + Thread.currentThread().getId() + " - " + result.getThrowable());
-                    childNode.fail(result.getThrowable()); // Log exception details
-                    break;
-                case ITestResult.SUCCESS:
-                    childNode.pass("Test Passed: " + result.getName());
-                    break;
-                case ITestResult.SKIP:
-                    childNode.skip("Test Skipped: " + result.getName());
-                    break;
-            }
-        }
+        WebDriver driver = WebDriverSetup.getDriver();
+        ExtentTest childNode = loginParent.createNode("Test Valid Logout");
+        ExtentManager.setTestNode(childNode);
 
-        // Clean up ThreadLocal to avoid stale references
-        ExtentManager.removeTestNode();
-        WebDriverSetup.quitDriver();
-    }
+       //getting locator
+        By accountCircle = LocatorConfig.getLocator("reqbuilderfe.login.accCircle");
+        By logoutBtn = LocatorConfig.getLocator("reqbuilderfe.login.logoutBtn");
 
-    @AfterTest
-    public void tearDown() {
-        // Quit WebDriver after all tests are done
-        // WebDriverSetup.quitDriver();
-        ExtentManager.flushAllReports();
+        driver.findElement(accountCircle).click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement logoutButton = wait.until(ExpectedConditions.elementToBeClickable(logoutBtn));
+        // Click on the logout button
+        logoutButton.click();
+
+        childNode.info("Clicked Logout Button");
+        logger.info("Clicked Logout Button");
+
+        // Wait for URL to contain "home" (Ensures login was successful)
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        boolean urlContainsLogout = wait.until(ExpectedConditions.urlContains("auth/login"));
+
+        String currentUrl = driver.getCurrentUrl();
+        childNode.info("Current URL after logout: " + currentUrl);
+        logger.info("Current URL after logout: " + currentUrl);
+
+        // Assert that "home" is in the URL
+        Assert.assertTrue(urlContainsLogout, "Logout failed or incorrect redirection.");
+        childNode.info("Logout successful, redirected to login page");
     }
 }
