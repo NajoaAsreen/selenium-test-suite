@@ -1,5 +1,4 @@
 package org.najoa.reqbuilderfe.login;
-
 import com.aventstack.extentreports.ExtentTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,33 +11,31 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 import java.time.Duration;
 
-public class LoginTestBasic {
+public class LoginTestBasic extends RequestBuilderFe {
     private static final Logger logger = LogManager.getLogger(LoginTestBasic.class);
     private ExtentTest loginParent;
 
     @BeforeMethod
     public void setUp() {
-        logger.info("Setting Up LoginTestBasic ThreadId: " + Thread.currentThread().getId());
+        // Define project and module
+     //   projectName = EnvManager.get("PROJECT_REQ_BUILDER_FE_NAME");
+        String moduleName = "LoginBasic";
+        logger.info("{}: Before Method: Setting Up LoginTestBasic ThreadId: {}", projectName, Thread.currentThread().getId());
 
         // Initialize WebDriver for each thread
         WebDriverSetup.initializeDriver();
-
-        // Define project and module
-        String projectName = EnvManager.get("PROJECT_REQ_BUILDER_FE_NAME");
-        String moduleName = "LoginBasic";
 
         // Get parent (module) test
         loginParent = ExtentManager.getModuleParent(projectName, moduleName);
     }
 
-    @Test
+    @Test(dependsOnGroups = {"login"})
     public void testValidLogin() {
-        logger.info("Executing testValidLogin on ThreadId: " + Thread.currentThread().getId());
+        logger.info(projectName+": "+"Executing testValidLogin on ThreadId: " + Thread.currentThread().getId());
 
         WebDriver driver = WebDriverSetup.getDriver();
         ExtentTest childNode = loginParent.createNode("Test Valid Login");
@@ -84,35 +81,5 @@ public class LoginTestBasic {
         // Assert that "home" is in the URL
         Assert.assertTrue(urlContainsHome, "Login failed or incorrect redirection.");
         childNode.info("Login successful, redirected to home page");
-    }
-
-    @AfterMethod
-    public void handleTestResult(ITestResult result) {
-        // Log test status to the child node (logging only once)
-        ExtentTest childNode = ExtentManager.getTestNode();
-        if (childNode != null) {
-            switch (result.getStatus()) {
-                case ITestResult.FAILURE:
-                    childNode.fail(result.getThrowable()); // Log exception details
-                    break;
-                case ITestResult.SUCCESS:
-                    childNode.pass("Test Passed: " + result.getName());
-                    break;
-                case ITestResult.SKIP:
-                    childNode.skip("Test Skipped: " + result.getName());
-                    break;
-            }
-        }
-
-        // Clean up ThreadLocal to avoid stale references
-        ExtentManager.removeTestNode();
-        WebDriverSetup.quitDriver();
-    }
-
-    @AfterTest
-    public void tearDown() {
-        // Quit WebDriver after all tests are done
-        // WebDriverSetup.quitDriver();
-        ExtentManager.flushAllReports();
     }
 }
