@@ -3,6 +3,7 @@ package org.najoa.configs;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import java.time.Duration;
 
 public class WebDriverSetup {
     private static final ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<>();
@@ -12,10 +13,12 @@ public class WebDriverSetup {
         if (threadLocalDriver.get() == null) {
             WebDriverManager.chromedriver().setup();
             WebDriver driver = new ChromeDriver();
+            driver.manage().window().maximize();
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
             threadLocalDriver.set(driver);
         }
         return threadLocalDriver.get();
-}
+    }
 
     public static WebDriver getDriver() {
         return threadLocalDriver.get();
@@ -29,8 +32,8 @@ public class WebDriverSetup {
     public static void quitDriver() {
         WebDriver driver = threadLocalDriver.get();
         if (driver != null) {
-            driver.quit();  // Quit the WebDriver instance
+            driver.quit();
         }
-        removeDriver();  // Remove the WebDriver from ThreadLocal
+        removeDriver();
     }
 }

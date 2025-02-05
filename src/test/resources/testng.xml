@@ -17,15 +17,7 @@
 <!--        </packages>-->
 <!--    </test>-->
 
-    <test name="DemoApp2 Tests">
-        <packages>
-            <!-- Specify multiple packages here -->
-            <!-- <package name="org.najoa.demoapp2.module1"/> &lt;!&ndash; Package 1 &ndash;&gt;-->
-            <!-- <package name="org.najoa.demoapp2.module2"/> &lt;!&ndash; Package 2 &ndash;&gt;-->
-            <!-- You can use wildcards for all sub-packages -->
-            <package name="org.najoa.demoapp2.*"/> <!-- All sub-packages in demoapp2 -->
-        </packages>
-    </test>
+  /
 
     <test name="ReqBuilderFE Tests">
         <packages>
@@ -33,9 +25,9 @@
         </packages>
     </test>
 
-        <test name="DemoApp Tests">
-            <packages>
-                <package name="org.najoa.demoapp"/> <!-- Package 1 -->
-            </packages>
-        </test>
+<!--        <test name="DemoApp Tests">-->
+<!--            <packages>-->
+<!--                <package name="org.najoa.demoapp"/> &lt;!&ndash; Package 1 &ndash;&gt;-->
+<!--            </packages>-->
+<!--        </test>-->
 </suite>

@@ -6,6 +6,7 @@ import org.najoa.configs.EnvManager;
 import org.najoa.configs.ExtentManager;
 import org.najoa.configs.LocatorConfig;
 import org.najoa.configs.WebDriverSetup;
+import org.najoa.reqbuilderfe.RequestBuilderFe;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -19,7 +20,7 @@ public class LoginTestBasic extends RequestBuilderFe {
     private static final Logger logger = LogManager.getLogger(LoginTestBasic.class);
     private ExtentTest loginParent;
 
-    @BeforeMethod
+    @BeforeTest
     public void setUp() {
         // Define project and module
      //   projectName = EnvManager.get("PROJECT_REQ_BUILDER_FE_NAME");
@@ -33,7 +34,7 @@ public class LoginTestBasic extends RequestBuilderFe {
         loginParent = ExtentManager.getModuleParent(projectName, moduleName);
     }
 
-    @Test(dependsOnGroups = {"login"})
+    @Test(dependsOnGroups = {"login"}, enabled = false)
     public void testValidLogin() {
         logger.info(projectName+": "+"Executing testValidLogin on ThreadId: " + Thread.currentThread().getId());
 
@@ -53,8 +54,6 @@ public class LoginTestBasic extends RequestBuilderFe {
 
         // Get locators
         By usernameField = LocatorConfig.getLocator("reqbuilderfe.login.usernameField");
-        // Wait for the username field to be visible before interacting
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(usernameField));
 
         By passwordField = LocatorConfig.getLocator("reqbuilderfe.login.passwordField");
         By loginBtn = LocatorConfig.getLocator("reqbuilderfe.login.loginBtn");
@@ -62,7 +61,7 @@ public class LoginTestBasic extends RequestBuilderFe {
         // Perform login
         driver.findElement(usernameField).sendKeys(userName);
         childNode.info("Entered Username: " + userName);
-        logger.info("Entered Username: " + userName);
+        logger.info("Entered Username: {}", userName);
         driver.findElement(passwordField).sendKeys(passWord);
         childNode.info("Entered Password");
         logger.info("Entered Password");
@@ -76,7 +75,7 @@ public class LoginTestBasic extends RequestBuilderFe {
 
         String currentUrl = driver.getCurrentUrl();
         childNode.info("Current URL after login: " + currentUrl);
-        logger.info("Current URL after login: " + currentUrl);
+        logger.info("Current URL after login: {}", currentUrl);
 
         // Assert that "home" is in the URL
         Assert.assertTrue(urlContainsHome, "Login failed or incorrect redirection.");

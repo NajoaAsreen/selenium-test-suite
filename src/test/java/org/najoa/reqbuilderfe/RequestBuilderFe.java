@@ -1,4 +1,4 @@
-package org.najoa.reqbuilderfe.login;
+package org.najoa.reqbuilderfe;
 import com.aventstack.extentreports.ExtentTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,9 +12,12 @@ import org.testng.annotations.AfterTest;
 public class RequestBuilderFe {
     private static final Logger logger = LogManager.getLogger(RequestBuilderFe.class);
     protected String projectName;
+
     public RequestBuilderFe(){
+
         projectName = EnvManager.get("PROJECT_REQ_BUILDER_FE_NAME");
     }
+
     @AfterMethod
     public void handleTestResult(ITestResult result) {
         // Log test status to the child node (logging only once)
@@ -38,6 +41,7 @@ public class RequestBuilderFe {
         ExtentManager.removeTestNode();
         // WebDriverSetup.quitDriver();
     }
+
     @AfterTest
     public void tearDown() {
         // Quit WebDriver after all tests are done
