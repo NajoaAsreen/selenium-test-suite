@@ -1,4 +1,4 @@
-package org.najoa.reqbuilder.home;
+package org.najoa.reqbuilderfe.home;
 
 import org.najoa.configs.LocatorConfig;
 import org.openqa.selenium.By;
