@@ -32,7 +32,8 @@ public class HomeTest extends RequestBuilderFe {
         homeParent = ExtentManager.getModuleParent(projectName, moduleName);
     }
 
-    @Test(dependsOnGroups = {"login"}) // Added missing @Test annotation
+    //@Test(dependsOnGroups = {"role"}) // Added missing @Test annotation
+    @Test(dependsOnMethods = "org.najoa.reqbuilderfe.usermanagement.RoleTest.testCreateRole",enabled = false)
     public void testValidLogout() {
         logger.info("Executing testValidLogout on ThreadId: {}", Thread.currentThread().getId());
 

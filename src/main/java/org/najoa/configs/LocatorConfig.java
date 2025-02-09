@@ -50,8 +50,22 @@ public class LocatorConfig {
     }
 
     public static By getLocator(String key) {
+        return getLocator(key, null); // Calls the overloaded method with `null` as envKey
+    }
+
+    public static By getLocator(String key, String envKey) {
         String locatorValue = locators.getProperty(key);
         if (locatorValue != null) {
+            // Check if an environment variable key is provided
+            if (envKey != null && !envKey.isEmpty()) {
+                String envValue = EnvManager.get(envKey); // Get the value from the environment
+                logger.debug("envValue:{}",envValue);
+                if (!envValue.isEmpty()) {
+                    // Replace the placeholder with the environment variable value
+                    locatorValue = locatorValue.replace("${" + envKey + "}", envValue);
+                }
+            }
+            logger.info("key: {}, locatorValue:{},", key, locatorValue);
             String[] parts = locatorValue.split("=", 2);
             String strategy = parts[0];
             String value = parts[1];
