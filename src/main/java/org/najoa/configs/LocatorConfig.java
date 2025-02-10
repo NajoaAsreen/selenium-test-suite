@@ -59,13 +59,14 @@ public class LocatorConfig {
             // Check if an environment variable key is provided
             if (envKey != null && !envKey.isEmpty()) {
                 String envValue = EnvManager.get(envKey); // Get the value from the environment
-                logger.debug("envValue:{}",envValue);
+                logger.info("envValue:{}",envValue);
                 if (!envValue.isEmpty()) {
                     // Replace the placeholder with the environment variable value
                     locatorValue = locatorValue.replace("${" + envKey + "}", envValue);
+                    logger.info("locatorValue:{}",locatorValue);
                 }
             }
-            logger.info("key: {}, locatorValue:{},", key, locatorValue);
+            logger.debug("key: {}, locatorValue:{},", key, locatorValue);
             String[] parts = locatorValue.split("=", 2);
             String strategy = parts[0];
             String value = parts[1];
