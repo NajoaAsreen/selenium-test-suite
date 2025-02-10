@@ -12,6 +12,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+@Test(groups = {"login"})
 public class LoginTest extends RequestBuilderFe {
     private static final Logger logger = LogManager.getLogger(LoginTest.class);
     private ExtentTest loginParent;
@@ -47,7 +48,7 @@ public class LoginTest extends RequestBuilderFe {
         loginPage.enterPassword(EnvManager.get("PROJECT_REQ_BUILDER_FE_PASSWORD"));
         loginTestNode.info("Entered password");
 
-        loginPage.clickLogin();
+        loginPage.clickLoginBtn();
         loginTestNode.info("Clicked login button");
         boolean isLoginSuccessful = loginPage.isLoginSuccessful();
 

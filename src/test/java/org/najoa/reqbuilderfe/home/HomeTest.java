@@ -24,8 +24,7 @@ public class HomeTest extends RequestBuilderFe {
         homeParent = ExtentManager.getModuleParent(projectName, moduleName);
     }
 
-    // @Test(dependsOnMethods = "RoleTest.testCreateRole", enabled = false)
-    @Test(dependsOnMethods = "org.najoa.reqbuilderfe.login.LoginTest.testValidLogin")
+    @Test(dependsOnMethods = "org.najoa.reqbuilderfe.usermanagement.RoleTest.testCreateRole")
     public void testValidLogout() {
         logger.info("{}:{} -> Executing testValidLogout on ThreadId: {}", projectName, moduleName, Thread.currentThread().getId());
         WebDriver driver = WebDriverSetup.getDriver();
@@ -45,7 +44,6 @@ public class HomeTest extends RequestBuilderFe {
         logoutTestNode.info("Current URL after logout: " + currentUrl);
         logger.info("Current URL after logout: {}", currentUrl);
 
-        // Assert that "auth/login" is in the URL
         Assert.assertTrue(isLogoutSuccessful, "Logout failed or incorrect redirection.");
         logoutTestNode.info("Logout successful, redirected to login page");
     }

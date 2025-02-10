@@ -11,8 +11,9 @@ import java.time.Duration;
 public class HomePage {
     private final WebDriver driver;
     private final WebDriverWait wait;
-    private final By avatarCircle = LocatorConfig.getLocator("reqbuilderfe.login.profileAvatar");
-    private final By logoutBtn = LocatorConfig.getLocator("reqbuilderfe.login.logoutBtn");
+    private final By avatarCircle = LocatorConfig.getLocator("reqbuilderfe.home.profileAvatar");
+    private final By logoutBtn = LocatorConfig.getLocator("reqbuilderfe.home.logoutBtn");
+    private final By roleCard = LocatorConfig.getLocator("reqbuilderfe.home.roleCard");
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
@@ -29,5 +30,10 @@ public class HomePage {
 
     public Boolean isLogoutSuccessful() {
         return wait.until(ExpectedConditions.urlContains("auth/login"));
+    }
+
+    public void clickRole() {
+        wait.until(ExpectedConditions.urlContains("/home"));
+        driver.findElement(roleCard).click();
     }
 }

@@ -94,8 +94,8 @@ public class LoginOldTest extends RequestBuilderFe {
         ExtentManager.setTestNode(childNode);
 
        //getting locator
-        By accountCircle = LocatorConfig.getLocator("reqbuilderfe.login.profileAvatar");
-        By logoutBtn = LocatorConfig.getLocator("reqbuilderfe.login.logoutBtn");
+        By accountCircle = LocatorConfig.getLocator("reqbuilderfe.home.profileAvatar");
+        By logoutBtn = LocatorConfig.getLocator("reqbuilderfe.home.logoutBtn");
 
         driver.findElement(accountCircle).click();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

@@ -1,95 +1,86 @@
 package org.najoa.reqbuilderfe.usermanagement;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.najoa.configs.LocatorConfig;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+
 import java.time.Duration;
 import java.util.NoSuchElementException;
+
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class RolePage {
+    private static final Logger logger = LogManager.getLogger(RolePage.class);
     private final WebDriver driver;
+    private final WebDriverWait wait;
+    private final By addRoleBtn = LocatorConfig.getLocator("reqbuilderfe.role.addRoleBtn");
+    private final By roleNameField = LocatorConfig.getLocator("reqbuilderfe.role.roleNameField");
+    private final By rolePermissionAllCheckbox = LocatorConfig.getLocator("reqbuilderfe.role.rolePermissionAllCheckbox");
+    private final By roleSaveBtn = LocatorConfig.getLocator("reqbuilderfe.role.roleSaveBtn");
+    private final By roleDeleteBtn = LocatorConfig.getLocator("reqbuilderfe.role.roleDeleteBtn");
+    private final By roleConfirmDeleteBtn = LocatorConfig.getLocator("reqbuilderfe.role.roleConfirmDeleteBtn");
+    private final By roleName = LocatorConfig.getLocator("reqbuilderfe.role.roleName", "PROJECT_REQ_BUILDER_FE_ROLE_NAME");
 
-    // Locators
-    private final By roleTenantsBtn = LocatorConfig.getLocator("reqbuilderfe.role.tenants");
-    private final By roletechDevBtn = LocatorConfig.getLocator("reqbuilderfe.role.techdev");
-    private final By roleOptionBtn = LocatorConfig.getLocator("reqbuilderfe.role.roleBtn");
-    private final By addRole = LocatorConfig.getLocator("reqbuilderfe.role.addroleBtn");
-    private final By roleNameField = LocatorConfig.getLocator("reqbuilderfe.role.rolenameField");
-    private final By rolepermAll = LocatorConfig.getLocator("reqbuilderfe.role.rolepermallField");
-    private final By roleSaveBtn = LocatorConfig.getLocator("reqbuilderfe.role.rolesaveBtn");
-    private final By roleDeleteBtn = LocatorConfig.getLocator("reqbuilderfe.role.roleDelete");
-    private final By roleConfirmDeleteBtn = LocatorConfig.getLocator("reqbuilderfe.role.roleconfirmDelete");
-    private final By roleExists = LocatorConfig.getLocator("reqbuilderfe.role.roleexists", "PROJECT_REQ_BUILDER_FE_ROLE_NAME");
-
-
-    // Constructor
     public RolePage(WebDriver driver) {
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(3));
     }
 
-    // Actions
-
-    public void clickTenants() {
-        driver.findElement(roleTenantsBtn).click();
-    }
-
-    public void clickTechDev() {
-        driver.findElement(roletechDevBtn).click();
-    }
-
-    public void clickRoleOption() {
-        driver.findElement(roleOptionBtn).click();
-    }
-
-    public void clickAddRole() {
-        driver.findElement(addRole).click();
+    public void clickAddRoleBtn() {
+        driver.findElement(addRoleBtn).click();
     }
 
     public void enterRoleName(String roleName) {
+        wait.until(ExpectedConditions.presenceOfElementLocated(roleNameField));
         driver.findElement(roleNameField).sendKeys(roleName);
     }
 
-    public void clickRolePermission() {
-        driver.findElement(rolepermAll).click();
+    public void clickRolePermissionAllCheckbox() {
+        driver.findElement(rolePermissionAllCheckbox).click();
     }
 
-    public void clickRoleSave() {
+    public void clickRoleSaveBtn() {
         driver.findElement(roleSaveBtn).click();
     }
 
-    public void clickExistingRole() {
-        driver.findElement(roleExists).click();
+    public void clickRole() {
+        driver.findElement(roleName).click();
     }
 
     public void clickRoleDeleteBtn() {
+        wait.until(ExpectedConditions.presenceOfElementLocated(roleDeleteBtn));
         driver.findElement(roleDeleteBtn).click();
     }
 
     public void clickRoleConfirmedDeleteBtn() {
+        wait.until(ExpectedConditions.presenceOfElementLocated(roleConfirmDeleteBtn));
         driver.findElement(roleConfirmDeleteBtn).click();
     }
 
-    public static void waitForSeconds(int seconds) {
+    public void wait(int millisecond) {
         try {
-            Thread.sleep(seconds * 1000L); // Convert seconds to milliseconds
+            Thread.sleep(millisecond);
         } catch (InterruptedException e) {
+            logger.error("Thread was interrupted while waiting for {} seconds", millisecond, e);
             Thread.currentThread().interrupt(); // Restore interrupted state
-            e.printStackTrace();
         }
     }
 
-    public boolean isRolePresent() {
+    public boolean isRoleExists() {
         try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3)); // Adjust timeout if needed
-            wait.until(ExpectedConditions.presenceOfElementLocated(roleExists));
+            wait.until(ExpectedConditions.presenceOfElementLocated(roleName));
             return true;
         } catch (NoSuchElementException e) {
+            logger.warn("Role '{}' not found in the DOM. NoSuchElementException occurred.", roleName);
             return false;
-        } catch (Exception e) {
-            return false; // Catch timeout or other exceptions safely
+        } catch (TimeoutException e) {
+            logger.warn("Timeout: Role '{}' not found within the specified wait time.", roleName);
+            return false;
         }
-}
+    }
 }
 
