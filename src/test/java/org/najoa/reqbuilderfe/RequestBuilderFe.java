@@ -14,7 +14,6 @@ public class RequestBuilderFe {
     protected String projectName;
 
     public RequestBuilderFe(){
-
         projectName = EnvManager.get("PROJECT_REQ_BUILDER_FE_NAME");
     }
 
@@ -26,7 +25,7 @@ public class RequestBuilderFe {
             switch (result.getStatus()) {
                 case ITestResult.FAILURE:
                     logger.error(projectName + ": " + result.getName() + ": is running on ThreadId: " + Thread.currentThread().getId() + " - " + result.getThrowable());
-                    childNode.fail(result.getThrowable()); // Log exception details
+                    childNode.fail(result.getThrowable());
                     break;
                 case ITestResult.SUCCESS:
                     childNode.pass("Test Passed: " + result.getName());
@@ -39,14 +38,11 @@ public class RequestBuilderFe {
 
         // Clean up ThreadLocal to avoid stale references
         ExtentManager.removeTestNode();
-        // WebDriverSetup.quitDriver();
     }
 
     @AfterTest
     public void tearDown() {
-        // Quit WebDriver after all tests are done
         logger.info("{}: After Test ThreadId: {}", EnvManager.get("PROJECT_REQ_BUILDER_FE_NAME"), Thread.currentThread().getId());
-
         WebDriverSetup.quitDriver();
         ExtentManager.flushAllReports();
     }

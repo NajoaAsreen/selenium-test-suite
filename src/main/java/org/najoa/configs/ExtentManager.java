@@ -48,7 +48,7 @@ public class ExtentManager {
     }
 
     public static void removeTestNode() {
-        threadLocalNode.remove(); // Clean up after each test
+        threadLocalNode.remove();
     }
 
     // Flush reports for all projects

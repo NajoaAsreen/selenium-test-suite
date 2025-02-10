@@ -16,13 +16,13 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 
 import java.time.Duration;
-@Test(groups = {"old-login"})
+
 public class LoginOldTest extends RequestBuilderFe {
     private static final Logger logger = LogManager.getLogger(LoginOldTest.class);
     private ExtentTest loginParent;
 
     // @BeforeTest
-    @BeforeTest
+    @BeforeTest(enabled = false)
     public void setUp() {
         // Define project and module
         //projectName = EnvManager.get("PROJECT_REQ_BUILDER_FE_NAME");
@@ -94,7 +94,7 @@ public class LoginOldTest extends RequestBuilderFe {
         ExtentManager.setTestNode(childNode);
 
        //getting locator
-        By accountCircle = LocatorConfig.getLocator("reqbuilderfe.login.accCircle");
+        By accountCircle = LocatorConfig.getLocator("reqbuilderfe.login.profileAvatar");
         By logoutBtn = LocatorConfig.getLocator("reqbuilderfe.login.logoutBtn");
 
         driver.findElement(accountCircle).click();

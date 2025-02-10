@@ -1,4 +1,5 @@
 package org.najoa.reqbuilderfe.login;
+
 import com.aventstack.extentreports.ExtentTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,31 +11,22 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import java.time.Duration;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-@Test(groups = {"login"})
 public class LoginTest extends RequestBuilderFe {
     private static final Logger logger = LogManager.getLogger(LoginTest.class);
     private ExtentTest loginParent;
+    private final String moduleName = "Login";
 
     @BeforeTest
     public void setUp() {
-
-        String moduleName = "Login";
-        logger.info("{}: Before Method: Setting Up LoginTest ThreadId: {}", projectName, Thread.currentThread().getId());
-
-        // Initialize WebDriver for each thread
+        logger.info("{}:{} -> @BeforeTest: Setting Up LoginTest on ThreadId: {}", projectName, moduleName, Thread.currentThread().getId());
         WebDriverSetup.initializeDriver();
-
-        // Get parent (module) test
         loginParent = ExtentManager.getModuleParent(projectName, moduleName);
     }
 
-    @Test(priority = 1)
+    @Test
     public void testValidLogin() {
-        logger.info("Executing testValidLogin on ThreadId: {}", Thread.currentThread().getId());
+        logger.info("{}:{} -> Executing testValidLogin on ThreadId: {}", projectName, moduleName, Thread.currentThread().getId());
 
         WebDriver driver = WebDriverSetup.getDriver();
         LoginPage loginPage = new LoginPage(driver);
@@ -50,23 +42,20 @@ public class LoginTest extends RequestBuilderFe {
 
         // Perform Login
         loginPage.enterUsername(EnvManager.get("PROJECT_REQ_BUILDER_FE_USERNAME"));
-        loginTestNode.info("Entered Username");
+        loginTestNode.info("Entered username");
 
         loginPage.enterPassword(EnvManager.get("PROJECT_REQ_BUILDER_FE_PASSWORD"));
-        loginTestNode.info("Entered Password");
+        loginTestNode.info("Entered password");
 
         loginPage.clickLogin();
-        loginTestNode.info("Clicked Login Button");
-
-        // Wait for Home Page
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        boolean urlContainsHome = wait.until(ExpectedConditions.urlContains("home"));
+        loginTestNode.info("Clicked login button");
+        boolean isLoginSuccessful = loginPage.isLoginSuccessful();
 
         String currentUrl = driver.getCurrentUrl();
         loginTestNode.info("Current URL after login: " + currentUrl);
         logger.info("Current URL after login: {}", currentUrl);
 
-        Assert.assertTrue(urlContainsHome, "Login failed or incorrect redirection.");
+        Assert.assertTrue(isLoginSuccessful, "Login failed or incorrect redirection.");
         loginTestNode.pass("Login successful, redirected to home page");
     }
 }

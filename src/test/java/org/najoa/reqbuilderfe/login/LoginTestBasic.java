@@ -1,4 +1,5 @@
 package org.najoa.reqbuilderfe.login;
+
 import com.aventstack.extentreports.ExtentTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,10 +21,10 @@ public class LoginTestBasic extends RequestBuilderFe {
     private static final Logger logger = LogManager.getLogger(LoginTestBasic.class);
     private ExtentTest loginParent;
 
-    @BeforeTest
+    @BeforeTest(enabled = false)
     public void setUp() {
         // Define project and module
-     //   projectName = EnvManager.get("PROJECT_REQ_BUILDER_FE_NAME");
+        //  projectName = EnvManager.get("PROJECT_REQ_BUILDER_FE_NAME");
         String moduleName = "LoginBasic";
         logger.info("{}: Before Method: Setting Up LoginTestBasic ThreadId: {}", projectName, Thread.currentThread().getId());
 
@@ -36,7 +37,7 @@ public class LoginTestBasic extends RequestBuilderFe {
 
     @Test(dependsOnGroups = {"login"}, enabled = false)
     public void testValidLogin() {
-        logger.info(projectName+": "+"Executing testValidLogin on ThreadId: " + Thread.currentThread().getId());
+        logger.info(projectName + ": " + "Executing testValidLogin on ThreadId: " + Thread.currentThread().getId());
 
         WebDriver driver = WebDriverSetup.getDriver();
         ExtentTest childNode = loginParent.createNode("Test Valid Login");

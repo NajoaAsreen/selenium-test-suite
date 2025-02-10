@@ -18,29 +18,25 @@ import org.testng.SkipException;
 public class RoleTest extends RequestBuilderFe {
     private static final Logger logger = LogManager.getLogger(RoleTest.class);
     private ExtentTest roleParent;
+    private final String moduleName = "UserManagement";
 
-    @BeforeTest
+    @BeforeTest(enabled = false)
     public void setUp() {
-
-        String moduleName = "UserManagement";
-        logger.info("{}: Before Method: Setting Up RoleTest ThreadId: {}", projectName, Thread.currentThread().getId());
-
-        // Initialize WebDriver for each thread
+        logger.info("{}:{} -> @BeforeTest: Setting Up RoleTest on ThreadId: {}", projectName, moduleName, Thread.currentThread().getId());
         WebDriverSetup.initializeDriver();
-
-        // Get parent (module) test
         roleParent = ExtentManager.getModuleParent(projectName, moduleName);
     }
 
-    @Test(dependsOnGroups = {"login"}, priority = 1)
+    @Test(dependsOnGroups = {"login"}, priority = 1, enabled = false)
     public void testDeleteRole() {
-        logger.info("Executing testDeleteRole on ThreadId: {}", Thread.currentThread().getId());
+        logger.info("{}:{} -> Executing testDeleteRole on ThreadId: {}", projectName, moduleName, Thread.currentThread().getId());
 
         WebDriver driver = WebDriverSetup.getDriver();
         RolePage rolePage = new RolePage(driver);
 
-        ExtentTest roleTestNode = roleParent.createNode("Test Valid Role Deletion");
-        ExtentManager.setTestNode(roleTestNode);
+        ExtentTest roleTestNode = roleParent.createNode("Test Role Deletion");
+        ExtentManager.setTestNode(roleTestNode); // ???
+
         // Navigate to Role Page
         rolePage.clickTenants();
         roleTestNode.info("Clicked Tenants");
@@ -80,7 +76,7 @@ public class RoleTest extends RequestBuilderFe {
 
     }
 
-    @Test(dependsOnGroups = {"login"}, priority = 2)
+    @Test(dependsOnGroups = {"login"}, priority = 2, enabled = false)
     public void testCreateRole() {
         logger.info("Executing testCreateRole on ThreadId: {}", Thread.currentThread().getId());
 

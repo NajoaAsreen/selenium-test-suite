@@ -11,24 +11,23 @@ import java.time.Duration;
 public class HomePage {
     private final WebDriver driver;
     private final WebDriverWait wait;
-    // Locators
-    private final By avatarCircle = LocatorConfig.getLocator("reqbuilderfe.login.accCircle");
+    private final By avatarCircle = LocatorConfig.getLocator("reqbuilderfe.login.profileAvatar");
     private final By logoutBtn = LocatorConfig.getLocator("reqbuilderfe.login.logoutBtn");
 
-    // Constructor
     public HomePage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(3));
     }
 
-    // Actions
     public void clickAvatar() {
         driver.findElement(avatarCircle).click();
     }
 
     public void clickLogout() {
-        // ✅ Wait until the logout button is clickable before clicking
         wait.until(ExpectedConditions.elementToBeClickable(logoutBtn)).click();
-        //driver.findElement(logoutBtn).click();
+    }
+
+    public Boolean isLogoutSuccessful() {
+        return wait.until(ExpectedConditions.urlContains("auth/login"));
     }
 }
