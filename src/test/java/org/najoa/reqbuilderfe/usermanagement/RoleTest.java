@@ -7,9 +7,7 @@ import org.najoa.configs.EnvManager;
 import org.najoa.configs.ExtentManager;
 import org.najoa.configs.WebDriverSetup;
 import org.najoa.reqbuilderfe.RequestBuilderFe;
-import org.najoa.reqbuilderfe.home.AdminHomePage;
 import org.najoa.reqbuilderfe.home.HomePage;
-import org.najoa.reqbuilderfe.home.TenantsPage;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
@@ -29,21 +27,13 @@ public class RoleTest extends RequestBuilderFe {
         roleParent = ExtentManager.getModuleParent(projectName, moduleName);
     }
 
-    @Test(dependsOnGroups = {"login"}, priority = 1)
+    @Test(dependsOnMethods = "org.najoa.reqbuilderfe.usermanagement.UserTest.testDeleteUser",priority=1)
     public void testDeleteRole() {
         logger.info("{}:{} -> Executing testDeleteRole on ThreadId: {}", projectName, moduleName, Thread.currentThread().getId());
 
         WebDriver driver = WebDriverSetup.getDriver();
         ExtentTest roleTestNode = roleParent.createNode("Test Role Deletion");
         ExtentManager.setTestNode(roleTestNode);
-
-        AdminHomePage adminHomePage = new AdminHomePage(driver);
-        adminHomePage.clickTenants();
-        roleTestNode.info("Clicked Tenants");
-
-        TenantsPage tenantsPage = new TenantsPage(driver);
-        tenantsPage.clickTenant();
-        roleTestNode.info("Clicked Tenant");
 
         HomePage homePage = new HomePage(driver);
         homePage.clickRole();
@@ -72,13 +62,13 @@ public class RoleTest extends RequestBuilderFe {
         roleTestNode.info("Clicked confirm delete button");
         logger.info("Clicked confirm delete button");
 
-        rolePage.wait(500);
+        wait(5000);
 
         Assert.assertFalse(rolePage.isRoleExists(), "Test Failed: Role not deleted");
         logger.info("Role is deleted");
     }
 
-    @Test(dependsOnGroups = {"login"}, priority = 2)
+    @Test(dependsOnMethods = "org.najoa.reqbuilderfe.usermanagement.UserTest.testDeleteUser",priority=2)
     public void testCreateRole() {
         logger.info("{}:{} -> Executing testCreateRole on ThreadId: {}", projectName, moduleName, Thread.currentThread().getId());
 
@@ -96,7 +86,7 @@ public class RoleTest extends RequestBuilderFe {
         roleTestNode.info("Entered Role name");
         logger.info("Entered Role name");
 
-        rolePage.wait(500);
+        wait(500);
 
         rolePage.clickRolePermissionAllCheckbox();
         roleTestNode.info("Clicked Role permission all checkbox");
@@ -106,7 +96,7 @@ public class RoleTest extends RequestBuilderFe {
         roleTestNode.info("Clicked Role save button");
         logger.info("Clicked Role save button");
 
-        rolePage.wait(500);
+        wait(500);
 
         Assert.assertTrue(rolePage.isRoleExists(), "Test Failed: Failed to create role");
         logger.info("New Role is created");

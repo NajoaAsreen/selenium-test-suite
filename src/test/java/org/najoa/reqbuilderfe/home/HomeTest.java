@@ -24,7 +24,7 @@ public class HomeTest extends RequestBuilderFe {
         homeParent = ExtentManager.getModuleParent(projectName, moduleName);
     }
 
-    @Test(dependsOnMethods = "org.najoa.reqbuilderfe.usermanagement.RoleTest.testCreateRole")
+    @Test(dependsOnMethods = "org.najoa.reqbuilderfe.usermanagement.UserTest.testCreateUser")
     public void testValidLogout() {
         logger.info("{}:{} -> Executing testValidLogout on ThreadId: {}", projectName, moduleName, Thread.currentThread().getId());
         WebDriver driver = WebDriverSetup.getDriver();

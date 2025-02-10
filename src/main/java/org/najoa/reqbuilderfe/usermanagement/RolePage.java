@@ -6,10 +6,8 @@ import org.najoa.configs.LocatorConfig;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
-
 import java.time.Duration;
 import java.util.NoSuchElementException;
-
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -59,15 +57,6 @@ public class RolePage {
     public void clickRoleConfirmedDeleteBtn() {
         wait.until(ExpectedConditions.presenceOfElementLocated(roleConfirmDeleteBtn));
         driver.findElement(roleConfirmDeleteBtn).click();
-    }
-
-    public void wait(int millisecond) {
-        try {
-            Thread.sleep(millisecond);
-        } catch (InterruptedException e) {
-            logger.error("Thread was interrupted while waiting for {} seconds", millisecond, e);
-            Thread.currentThread().interrupt(); // Restore interrupted state
-        }
     }
 
     public boolean isRoleExists() {

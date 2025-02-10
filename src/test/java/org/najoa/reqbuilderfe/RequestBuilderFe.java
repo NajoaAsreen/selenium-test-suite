@@ -17,6 +17,15 @@ public class RequestBuilderFe {
         projectName = EnvManager.get("PROJECT_REQ_BUILDER_FE_NAME");
     }
 
+    public void wait(int millisecond) {
+        try {
+            Thread.sleep(millisecond);
+        } catch (InterruptedException e) {
+            logger.error("Thread was interrupted while waiting for {} seconds", millisecond, e);
+            Thread.currentThread().interrupt(); // Restore interrupted state
+        }
+    }
+
     @AfterMethod
     public void handleTestResult(ITestResult result) {
         // Log test status to the child node (logging only once)

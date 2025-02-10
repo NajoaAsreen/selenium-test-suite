@@ -5,7 +5,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 
 public class HomePage {
@@ -14,10 +13,11 @@ public class HomePage {
     private final By avatarCircle = LocatorConfig.getLocator("reqbuilderfe.home.profileAvatar");
     private final By logoutBtn = LocatorConfig.getLocator("reqbuilderfe.home.logoutBtn");
     private final By roleCard = LocatorConfig.getLocator("reqbuilderfe.home.roleCard");
+    private final By userCard = LocatorConfig.getLocator("reqbuilderfe.home.userCard");
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
 
     public void clickAvatar() {
@@ -35,5 +35,10 @@ public class HomePage {
     public void clickRole() {
         wait.until(ExpectedConditions.urlContains("/home"));
         driver.findElement(roleCard).click();
+    }
+
+    public void clickUser() {
+        wait.until(ExpectedConditions.urlContains("/home"));
+        driver.findElement(userCard).click();
     }
 }
