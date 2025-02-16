@@ -11,13 +11,9 @@
 
 <!-- Nested Package Level -->
 <suite name="Selenium Test Suite" parallel="tests" thread-count="3">
-<!--    <test name="DemoApp Tests">-->
-<!--        <packages>-->
-<!--            <package name="org.najoa.demoapp"/> &lt;!&ndash; Package 1 &ndash;&gt;-->
-<!--        </packages>-->
-<!--    </test>-->
-
-
+    <listeners>
+        <listener class-name="org.najoa.listeners.ExtentReportListener"/>
+    </listeners>
 
     <test name="ReqBuilderFE Tests">
         <packages>
@@ -25,9 +21,14 @@
         </packages>
     </test>
 
-<!--        <test name="DemoApp Tests">-->
-<!--            <packages>-->
-<!--                <package name="org.najoa.demoapp"/> &lt;!&ndash; Package 1 &ndash;&gt;-->
-<!--            </packages>-->
-<!--        </test>-->
+    <!--    <test name="DemoApp Tests">-->
+    <!--        <packages>-->
+    <!--            <package name="org.najoa.demoapp"/> &lt;!&ndash; Package 1 &ndash;&gt;-->
+    <!--        </packages>-->
+    <!--    </test>-->
+    <!--        <test name="DemoApp Tests">-->
+    <!--            <packages>-->
+    <!--                <package name="org.najoa.demoapp"/> &lt;!&ndash; Package 1 &ndash;&gt;-->
+    <!--            </packages>-->
+    <!--        </test>-->
 </suite>

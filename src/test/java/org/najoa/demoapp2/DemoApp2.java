@@ -45,6 +45,5 @@ public class DemoApp2 {
         logger.info(EnvManager.get("PROJECT_DEMO_APP2_NAME")+": "+"After Test ThreadId: " + Thread.currentThread().getId());
 
         WebDriverSetup.quitDriver();
-        ExtentManager.flushAllReports();
     }
 }

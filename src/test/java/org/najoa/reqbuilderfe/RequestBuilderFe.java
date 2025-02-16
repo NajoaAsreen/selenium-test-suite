@@ -53,7 +53,6 @@ public class RequestBuilderFe {
     public void tearDown() {
         logger.info("{}: After Test ThreadId: {}", EnvManager.get("PROJECT_REQ_BUILDER_FE_NAME"), Thread.currentThread().getId());
         WebDriverSetup.quitDriver();
-        ExtentManager.flushAllReports();
     }
 
 }
