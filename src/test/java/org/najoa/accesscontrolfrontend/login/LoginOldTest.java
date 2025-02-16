@@ -1,4 +1,4 @@
-package org.najoa.reqbuilderfe.login;
+package org.najoa.accesscontrolfrontend.login;
 import com.aventstack.extentreports.ExtentTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -6,7 +6,7 @@ import org.najoa.configs.EnvManager;
 import org.najoa.configs.ExtentManager;
 import org.najoa.configs.LocatorConfig;
 import org.najoa.configs.WebDriverSetup;
-import org.najoa.reqbuilderfe.RequestBuilderFe;
+import org.najoa.accesscontrolfrontend.AccessControlFrontend;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,7 +17,7 @@ import org.testng.annotations.*;
 
 import java.time.Duration;
 
-public class LoginOldTest extends RequestBuilderFe {
+public class LoginOldTest extends AccessControlFrontend {
     private static final Logger logger = LogManager.getLogger(LoginOldTest.class);
     private ExtentTest loginParent;
 
@@ -25,7 +25,7 @@ public class LoginOldTest extends RequestBuilderFe {
     @BeforeTest(enabled = false)
     public void setUp() {
         // Define project and module
-        //projectName = EnvManager.get("PROJECT_REQ_BUILDER_FE_NAME");
+        //projectName = EnvManager.get("PROJECT_ACCESS_CONTROL_FE_NAME");
         String moduleName = "Login";
         logger.info("{}: Before Method: Setting Up LoginTest ThreadId: {}", projectName, Thread.currentThread().getId());
 
@@ -46,19 +46,19 @@ public class LoginOldTest extends RequestBuilderFe {
         ExtentManager.setTestNode(childNode);
 
         // Navigate to the login page
-        String loginUrl = EnvManager.get("PROJECT_REQ_BUILDER_FE_URI");
+        String loginUrl = EnvManager.get("PROJECT_ACCESS_CONTROL_FE_URI");
         driver.get(loginUrl);
         childNode.info("Navigating to: " + loginUrl);
        logger.info("{}: Navigating to: {}", projectName, loginUrl);
 
         // Get locators
-        By usernameField = LocatorConfig.getLocator("reqbuilderfe.login.usernameField");
-        By passwordField = LocatorConfig.getLocator("reqbuilderfe.login.passwordField");
-        By loginBtn = LocatorConfig.getLocator("reqbuilderfe.login.loginBtn");
+        By usernameField = LocatorConfig.getLocator("accesscontrolfrontend.login.usernameField");
+        By passwordField = LocatorConfig.getLocator("accesscontrolfrontend.login.passwordField");
+        By loginBtn = LocatorConfig.getLocator("accesscontrolfrontend.login.loginBtn");
 
         // Retrieve credentials
-        String userName = EnvManager.get("PROJECT_REQ_BUILDER_FE_USERNAME");
-        String passWord = EnvManager.get("PROJECT_REQ_BUILDER_FE_PASSWORD");
+        String userName = EnvManager.get("PROJECT_ACCESS_CONTROL_FE_USERNAME");
+        String passWord = EnvManager.get("PROJECT_ACCESS_CONTROL_FE_PASSWORD");
 
         // Perform login
         driver.findElement(usernameField).sendKeys(userName);
@@ -94,8 +94,8 @@ public class LoginOldTest extends RequestBuilderFe {
         ExtentManager.setTestNode(childNode);
 
        //getting locator
-        By accountCircle = LocatorConfig.getLocator("reqbuilderfe.home.profileAvatar");
-        By logoutBtn = LocatorConfig.getLocator("reqbuilderfe.home.logoutBtn");
+        By accountCircle = LocatorConfig.getLocator("accesscontrolfrontend.home.profileAvatar");
+        By logoutBtn = LocatorConfig.getLocator("accesscontrolfrontend.home.logoutBtn");
 
         driver.findElement(accountCircle).click();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

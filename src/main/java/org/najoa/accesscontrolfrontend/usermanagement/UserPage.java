@@ -1,4 +1,4 @@
-package org.najoa.reqbuilderfe.usermanagement;
+package org.najoa.accesscontrolfrontend.usermanagement;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,18 +15,18 @@ public class UserPage {
     private static final Logger logger = LogManager.getLogger(UserPage.class);
     private final WebDriver driver;
     private final WebDriverWait wait;
-    private final By addUserBtn = LocatorConfig.getLocator("reqbuilderfe.user.addUserBtn");
-    private final By userFullNameField = LocatorConfig.getLocator("reqbuilderfe.user.userFullNameField");
-    private final By userUsernameField = LocatorConfig.getLocator("reqbuilderfe.user.usernameField");
-    private final By userPasswordField = LocatorConfig.getLocator("reqbuilderfe.user.passwordField");
-    private final By userEmailField = LocatorConfig.getLocator("reqbuilderfe.user.emailField");
-    private final By userRoleOptionDropdown = LocatorConfig.getLocator("reqbuilderfe.user.roleOptionDropdown");
-    private final By userSelectRoleFromDropdown = LocatorConfig.getLocator("reqbuilderfe.user.pickRoleFromDropdown", "PROJECT_REQ_BUILDER_FE_ROLE_NAME");
-    private final By userPhoneNumberField = LocatorConfig.getLocator("reqbuilderfe.user.phoneNumberField");
-    private final By userSaveBtn = LocatorConfig.getLocator("reqbuilderfe.user.saveBtn");
-    private final By userDeleteBtn = LocatorConfig.getLocator("reqbuilderfe.user.userDeleteBtn");
-    private final By userConfirmDeleteBtn = LocatorConfig.getLocator("reqbuilderfe.user.userConfirmDeleteBtn");
-    private final By username = LocatorConfig.getLocator("reqbuilderfe.user.username", "PROJECT_REQ_BUILDER_FE_USER_USERNAME");
+    private final By addUserBtn = LocatorConfig.getLocator("accesscontrolfrontend.user.addUserBtn");
+    private final By userFullNameField = LocatorConfig.getLocator("accesscontrolfrontend.user.userFullNameField");
+    private final By userUsernameField = LocatorConfig.getLocator("accesscontrolfrontend.user.usernameField");
+    private final By userPasswordField = LocatorConfig.getLocator("accesscontrolfrontend.user.passwordField");
+    private final By userEmailField = LocatorConfig.getLocator("accesscontrolfrontend.user.emailField");
+    private final By userRoleOptionDropdown = LocatorConfig.getLocator("accesscontrolfrontend.user.roleOptionDropdown");
+    private final By userSelectRoleFromDropdown = LocatorConfig.getLocator("accesscontrolfrontend.user.pickRoleFromDropdown", "PROJECT_ACCESS_CONTROL_FE_ROLE_NAME");
+    private final By userPhoneNumberField = LocatorConfig.getLocator("accesscontrolfrontend.user.phoneNumberField");
+    private final By userSaveBtn = LocatorConfig.getLocator("accesscontrolfrontend.user.saveBtn");
+    private final By userDeleteBtn = LocatorConfig.getLocator("accesscontrolfrontend.user.userDeleteBtn");
+    private final By userConfirmDeleteBtn = LocatorConfig.getLocator("accesscontrolfrontend.user.userConfirmDeleteBtn");
+    private final By username = LocatorConfig.getLocator("accesscontrolfrontend.user.username", "PROJECT_ACCESS_CONTROL_FE_USER_USERNAME");
 
     public UserPage(WebDriver driver) {
         this.driver = driver;

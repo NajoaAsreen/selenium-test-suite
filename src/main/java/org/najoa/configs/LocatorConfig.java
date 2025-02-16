@@ -18,9 +18,9 @@ public class LocatorConfig {
             loadLocators("locators.properties");
 
             // Get application names from the environment file or system property
-            String appNames = EnvManager.get("APP_NAMES");
+            String appNames = EnvManager.get("PROJECT_NAMES");
             if (appNames.isEmpty()) {
-                logger.warn("No application names found in APP_NAMES environment variable, using default locators only.");
+                logger.warn("No application names found in PROJECT_NAMES environment variable, using default locators only.");
             } else {
                 // Split the comma-separated list of application names into a list
                 List<String> appList = new ArrayList<>(Arrays.asList(appNames.split(",")));

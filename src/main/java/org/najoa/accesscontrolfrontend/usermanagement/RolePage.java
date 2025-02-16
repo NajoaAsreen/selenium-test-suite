@@ -1,4 +1,4 @@
-package org.najoa.reqbuilderfe.usermanagement;
+package org.najoa.accesscontrolfrontend.usermanagement;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,13 +15,13 @@ public class RolePage {
     private static final Logger logger = LogManager.getLogger(RolePage.class);
     private final WebDriver driver;
     private final WebDriverWait wait;
-    private final By addRoleBtn = LocatorConfig.getLocator("reqbuilderfe.role.addRoleBtn");
-    private final By roleNameField = LocatorConfig.getLocator("reqbuilderfe.role.roleNameField");
-    private final By rolePermissionAllCheckbox = LocatorConfig.getLocator("reqbuilderfe.role.rolePermissionAllCheckbox");
-    private final By roleSaveBtn = LocatorConfig.getLocator("reqbuilderfe.role.roleSaveBtn");
-    private final By roleDeleteBtn = LocatorConfig.getLocator("reqbuilderfe.role.roleDeleteBtn");
-    private final By roleConfirmDeleteBtn = LocatorConfig.getLocator("reqbuilderfe.role.roleConfirmDeleteBtn");
-    private final By roleName = LocatorConfig.getLocator("reqbuilderfe.role.roleName", "PROJECT_REQ_BUILDER_FE_ROLE_NAME");
+    private final By addRoleBtn = LocatorConfig.getLocator("accesscontrolfrontend.role.addRoleBtn");
+    private final By roleNameField = LocatorConfig.getLocator("accesscontrolfrontend.role.roleNameField");
+    private final By rolePermissionAllCheckbox = LocatorConfig.getLocator("accesscontrolfrontend.role.rolePermissionAllCheckbox");
+    private final By roleSaveBtn = LocatorConfig.getLocator("accesscontrolfrontend.role.roleSaveBtn");
+    private final By roleDeleteBtn = LocatorConfig.getLocator("accesscontrolfrontend.role.roleDeleteBtn");
+    private final By roleConfirmDeleteBtn = LocatorConfig.getLocator("accesscontrolfrontend.role.roleConfirmDeleteBtn");
+    private final By roleName = LocatorConfig.getLocator("accesscontrolfrontend.role.roleName", "PROJECT_ACCESS_CONTROL_FE_ROLE_NAME");
 
     public RolePage(WebDriver driver) {
         this.driver = driver;

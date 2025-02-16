@@ -1,4 +1,4 @@
-package org.najoa.reqbuilderfe.usermanagement;
+package org.najoa.accesscontrolfrontend.usermanagement;
 
 import com.aventstack.extentreports.ExtentTest;
 import org.apache.logging.log4j.LogManager;
@@ -6,17 +6,17 @@ import org.apache.logging.log4j.Logger;
 import org.najoa.configs.EnvManager;
 import org.najoa.configs.ExtentManager;
 import org.najoa.configs.WebDriverSetup;
-import org.najoa.reqbuilderfe.RequestBuilderFe;
-import org.najoa.reqbuilderfe.home.AdminHomePage;
-import org.najoa.reqbuilderfe.home.HomePage;
-import org.najoa.reqbuilderfe.home.TenantsPage;
+import org.najoa.accesscontrolfrontend.AccessControlFrontend;
+import org.najoa.accesscontrolfrontend.home.AdminHomePage;
+import org.najoa.accesscontrolfrontend.home.HomePage;
+import org.najoa.accesscontrolfrontend.home.TenantsPage;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.SkipException;
 
-public class UserTest extends RequestBuilderFe {
+public class UserTest extends AccessControlFrontend {
     private static final Logger logger = LogManager.getLogger(UserTest.class);
     private ExtentTest userParent;
     private final String moduleName = "UserManagement";
@@ -79,7 +79,7 @@ public class UserTest extends RequestBuilderFe {
         driver.navigate().back();
     }
 
-    @Test(dependsOnMethods = "org.najoa.reqbuilderfe.usermanagement.RoleTest.testCreateRole",priority=2)
+    @Test(dependsOnMethods = "org.najoa.accesscontrolfrontend.usermanagement.RoleTest.testCreateRole",priority=2)
     public void testCreateUser() {
         logger.info("{}:{} -> Executing testCreateUser on ThreadId: {}", projectName, moduleName, Thread.currentThread().getId());
 
@@ -97,19 +97,19 @@ public class UserTest extends RequestBuilderFe {
         userTestNode.info("Clicked add User button");
         logger.info("Clicked add User button");
 
-        userPage.enterUserFullName(EnvManager.get("PROJECT_REQ_BUILDER_FE_USER_FULLNAME"));
+        userPage.enterUserFullName(EnvManager.get("PROJECT_ACCESS_CONTROL_FE_USER_FULLNAME"));
         userTestNode.info("Entered User fullname");
         logger.info("Entered User fullname");
 
-        userPage.enterUserUsername(EnvManager.get("PROJECT_REQ_BUILDER_FE_USER_USERNAME"));
+        userPage.enterUserUsername(EnvManager.get("PROJECT_ACCESS_CONTROL_FE_USER_USERNAME"));
         userTestNode.info("Entered User username");
         logger.info("Entered User username");
 
-        userPage.enterUserPassword(EnvManager.get("PROJECT_REQ_BUILDER_FE_USER_PASSWORD"));
+        userPage.enterUserPassword(EnvManager.get("PROJECT_ACCESS_CONTROL_FE_USER_PASSWORD"));
         userTestNode.info("Entered User password");
         logger.info("Entered User password");
 
-        userPage.enterUserEmail(EnvManager.get("PROJECT_REQ_BUILDER_FE_USER_EMAIL"));
+        userPage.enterUserEmail(EnvManager.get("PROJECT_ACCESS_CONTROL_FE_USER_EMAIL"));
         userTestNode.info("Entered User email");
         logger.info("Entered User email");
 
@@ -121,7 +121,7 @@ public class UserTest extends RequestBuilderFe {
         userTestNode.info("Selected Role from dropdown button for User");
         logger.info("Selected Role from dropdown button for User");
 
-        userPage.enterUserPhoneNumber(EnvManager.get("PROJECT_REQ_BUILDER_FE_USER_PHONE_NUMBER"));
+        userPage.enterUserPhoneNumber(EnvManager.get("PROJECT_ACCESS_CONTROL_FE_USER_PHONE_NUMBER"));
         userTestNode.info("Entered User phone number");
         logger.info("Entered User phone number");
 

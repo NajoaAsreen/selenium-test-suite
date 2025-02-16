@@ -1,18 +1,18 @@
-package org.najoa.reqbuilderfe.home;
+package org.najoa.accesscontrolfrontend.home;
 
 import com.aventstack.extentreports.ExtentTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.najoa.configs.ExtentManager;
 import org.najoa.configs.WebDriverSetup;
-import org.najoa.reqbuilderfe.RequestBuilderFe;
+import org.najoa.accesscontrolfrontend.AccessControlFrontend;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 @Test(groups = {"home"})
-public class HomeTest extends RequestBuilderFe {
+public class HomeTest extends AccessControlFrontend {
     private static final Logger logger = LogManager.getLogger(HomeTest.class);
     private ExtentTest homeParent;
     private final String moduleName = "Home";
@@ -24,7 +24,7 @@ public class HomeTest extends RequestBuilderFe {
         homeParent = ExtentManager.getModuleParent(projectName, moduleName);
     }
 
-    @Test(dependsOnMethods = "org.najoa.reqbuilderfe.usermanagement.UserTest.testCreateUser")
+    @Test(dependsOnMethods = "org.najoa.accesscontrolfrontend.usermanagement.UserTest.testCreateUser")
     public void testValidLogout() {
         logger.info("{}:{} -> Executing testValidLogout on ThreadId: {}", projectName, moduleName, Thread.currentThread().getId());
         WebDriver driver = WebDriverSetup.getDriver();

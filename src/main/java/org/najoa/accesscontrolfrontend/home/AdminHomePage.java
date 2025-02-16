@@ -1,4 +1,4 @@
-package org.najoa.reqbuilderfe.home;
+package org.najoa.accesscontrolfrontend.home;
 
 import org.najoa.configs.LocatorConfig;
 import org.openqa.selenium.By;
@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 public class AdminHomePage {
     private final WebDriver driver;
     // private final WebDriverWait wait;
-    private final By tenantsCard = LocatorConfig.getLocator("reqbuilderfe.home.tenantsCard");
+    private final By tenantsCard = LocatorConfig.getLocator("accesscontrolfrontend.home.tenantsCard");
 
     public AdminHomePage(WebDriver driver) {
         this.driver = driver;

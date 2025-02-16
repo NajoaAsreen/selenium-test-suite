@@ -1,4 +1,4 @@
-package org.najoa.reqbuilderfe;
+package org.najoa.accesscontrolfrontend;
 import com.aventstack.extentreports.ExtentTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,12 +9,12 @@ import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 
-public class RequestBuilderFe {
-    private static final Logger logger = LogManager.getLogger(RequestBuilderFe.class);
+public class AccessControlFrontend {
+    private static final Logger logger = LogManager.getLogger(AccessControlFrontend.class);
     protected String projectName;
 
-    public RequestBuilderFe(){
-        projectName = EnvManager.get("PROJECT_REQ_BUILDER_FE_NAME");
+    public AccessControlFrontend(){
+        projectName = EnvManager.get("PROJECT_ACCESS_CONTROL_FE_NAME");
     }
 
     public void wait(int millisecond) {
@@ -51,7 +51,7 @@ public class RequestBuilderFe {
 
     @AfterTest
     public void tearDown() {
-        logger.info("{}: After Test ThreadId: {}", EnvManager.get("PROJECT_REQ_BUILDER_FE_NAME"), Thread.currentThread().getId());
+        logger.info("{}: After Test ThreadId: {}", EnvManager.get("PROJECT_ACCESS_CONTROL_FE_NAME"), Thread.currentThread().getId());
         WebDriverSetup.quitDriver();
     }
 

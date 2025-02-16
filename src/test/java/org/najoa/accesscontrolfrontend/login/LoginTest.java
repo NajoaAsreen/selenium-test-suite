@@ -1,4 +1,4 @@
-package org.najoa.reqbuilderfe.login;
+package org.najoa.accesscontrolfrontend.login;
 
 import com.aventstack.extentreports.ExtentTest;
 import org.apache.logging.log4j.LogManager;
@@ -6,14 +6,14 @@ import org.apache.logging.log4j.Logger;
 import org.najoa.configs.EnvManager;
 import org.najoa.configs.ExtentManager;
 import org.najoa.configs.WebDriverSetup;
-import org.najoa.reqbuilderfe.RequestBuilderFe;
+import org.najoa.accesscontrolfrontend.AccessControlFrontend;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 @Test(groups = {"login"})
-public class LoginTest extends RequestBuilderFe {
+public class LoginTest extends AccessControlFrontend {
     private static final Logger logger = LogManager.getLogger(LoginTest.class);
     private ExtentTest loginParent;
     private final String moduleName = "Login";
@@ -36,16 +36,16 @@ public class LoginTest extends RequestBuilderFe {
         ExtentManager.setTestNode(loginTestNode);
 
         // Navigate to Login Page
-        String loginUrl = EnvManager.get("PROJECT_REQ_BUILDER_FE_URI");
+        String loginUrl = EnvManager.get("PROJECT_ACCESS_CONTROL_FE_URI");
         driver.get(loginUrl);
         loginTestNode.info("Navigating to: " + loginUrl);
         logger.info("Navigating to: {}", loginUrl);
 
         // Perform Login
-        loginPage.enterUsername(EnvManager.get("PROJECT_REQ_BUILDER_FE_USERNAME"));
+        loginPage.enterUsername(EnvManager.get("PROJECT_ACCESS_CONTROL_FE_USERNAME"));
         loginTestNode.info("Entered username");
 
-        loginPage.enterPassword(EnvManager.get("PROJECT_REQ_BUILDER_FE_PASSWORD"));
+        loginPage.enterPassword(EnvManager.get("PROJECT_ACCESS_CONTROL_FE_PASSWORD"));
         loginTestNode.info("Entered password");
 
         loginPage.clickLoginBtn();

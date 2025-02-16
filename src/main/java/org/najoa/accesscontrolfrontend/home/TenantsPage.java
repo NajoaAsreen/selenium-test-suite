@@ -1,4 +1,4 @@
-package org.najoa.reqbuilderfe.home;
+package org.najoa.accesscontrolfrontend.home;
 
 import org.najoa.configs.LocatorConfig;
 import org.openqa.selenium.By;
@@ -10,7 +10,7 @@ import java.time.Duration;
 public class TenantsPage {
     private final WebDriver driver;
     private final WebDriverWait wait;
-    private final By tenantToBeSelected = LocatorConfig.getLocator("reqbuilderfe.home.tenantToBeSelected");
+    private final By tenantToBeSelected = LocatorConfig.getLocator("accesscontrolfrontend.home.tenantToBeSelected");
 
     public TenantsPage(WebDriver driver) {
         this.driver = driver;

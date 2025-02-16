@@ -1,4 +1,4 @@
-package org.najoa.reqbuilderfe.usermanagement;
+package org.najoa.accesscontrolfrontend.usermanagement;
 
 import com.aventstack.extentreports.ExtentTest;
 import org.apache.logging.log4j.LogManager;
@@ -6,8 +6,8 @@ import org.apache.logging.log4j.Logger;
 import org.najoa.configs.EnvManager;
 import org.najoa.configs.ExtentManager;
 import org.najoa.configs.WebDriverSetup;
-import org.najoa.reqbuilderfe.RequestBuilderFe;
-import org.najoa.reqbuilderfe.home.HomePage;
+import org.najoa.accesscontrolfrontend.AccessControlFrontend;
+import org.najoa.accesscontrolfrontend.home.HomePage;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 import org.testng.SkipException;
 
 @Test(groups = {"role"})
-public class RoleTest extends RequestBuilderFe {
+public class RoleTest extends AccessControlFrontend {
     private static final Logger logger = LogManager.getLogger(RoleTest.class);
     private ExtentTest roleParent;
     private final String moduleName = "UserManagement";
@@ -27,7 +27,7 @@ public class RoleTest extends RequestBuilderFe {
         roleParent = ExtentManager.getModuleParent(projectName, moduleName);
     }
 
-    @Test(dependsOnMethods = "org.najoa.reqbuilderfe.usermanagement.UserTest.testDeleteUser",priority=1)
+    @Test(dependsOnMethods = "org.najoa.accesscontrolfrontend.usermanagement.UserTest.testDeleteUser",priority=1)
     public void testDeleteRole() {
         logger.info("{}:{} -> Executing testDeleteRole on ThreadId: {}", projectName, moduleName, Thread.currentThread().getId());
 
@@ -68,7 +68,7 @@ public class RoleTest extends RequestBuilderFe {
         logger.info("Role is deleted");
     }
 
-    @Test(dependsOnMethods = "org.najoa.reqbuilderfe.usermanagement.UserTest.testDeleteUser",priority=2)
+    @Test(dependsOnMethods = "org.najoa.accesscontrolfrontend.usermanagement.UserTest.testDeleteUser",priority=2)
     public void testCreateRole() {
         logger.info("{}:{} -> Executing testCreateRole on ThreadId: {}", projectName, moduleName, Thread.currentThread().getId());
 
@@ -82,7 +82,7 @@ public class RoleTest extends RequestBuilderFe {
         roleTestNode.info("Clicked add Role button");
         logger.info("Clicked add Role button");
 
-        rolePage.enterRoleName(EnvManager.get("PROJECT_REQ_BUILDER_FE_ROLE_NAME"));
+        rolePage.enterRoleName(EnvManager.get("PROJECT_ACCESS_CONTROL_FE_ROLE_NAME"));
         roleTestNode.info("Entered Role name");
         logger.info("Entered Role name");
 
