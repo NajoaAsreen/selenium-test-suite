@@ -28,7 +28,7 @@ public class UserTest extends AccessControlFrontend {
         userParent = ExtentManager.getModuleParent(projectName, moduleName);
     }
 
-    @Test(dependsOnGroups = {"login"}, priority = 1)
+    @Test(dependsOnGroups = {"login"})
     public void testDeleteUser() {
         logger.info("{}:{} -> Executing testDeleteUser on ThreadId: {}", projectName, moduleName, Thread.currentThread().getId());
 
@@ -52,6 +52,8 @@ public class UserTest extends AccessControlFrontend {
         boolean isUserExists = userPage.isUserExists();
 
         if (!isUserExists) {
+            userTestNode.info("Navigating back");
+            logger.info("Navigating back");
             driver.navigate().back();
             logger.warn("User does not exists. Skipping user deletion.");
             userTestNode.warning("User does not exists. Skipping user deletion.");
@@ -76,10 +78,12 @@ public class UserTest extends AccessControlFrontend {
 
         Assert.assertFalse(userPage.isUserExists(), "Test Failed: User not deleted");
         logger.info("User is deleted");
+        userTestNode.info("Navigating back");
+        logger.info("Navigating back");
         driver.navigate().back();
     }
 
-    @Test(dependsOnMethods = "org.najoa.accesscontrolfrontend.usermanagement.RoleTest.testCreateRole",priority=2)
+    @Test(dependsOnMethods = "org.najoa.accesscontrolfrontend.usermanagement.RoleTest.testCreateRole")
     public void testCreateUser() {
         logger.info("{}:{} -> Executing testCreateUser on ThreadId: {}", projectName, moduleName, Thread.currentThread().getId());
 
@@ -88,6 +92,7 @@ public class UserTest extends AccessControlFrontend {
         ExtentManager.setTestNode(userTestNode);
 
         HomePage homePage = new HomePage(driver);
+        wait(100);
         homePage.clickUser();
         userTestNode.info("Clicked User");
 

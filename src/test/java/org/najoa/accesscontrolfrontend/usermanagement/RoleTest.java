@@ -27,7 +27,7 @@ public class RoleTest extends AccessControlFrontend {
         roleParent = ExtentManager.getModuleParent(projectName, moduleName);
     }
 
-    @Test(dependsOnMethods = "org.najoa.accesscontrolfrontend.usermanagement.UserTest.testDeleteUser",priority=1)
+    @Test(dependsOnMethods = "org.najoa.accesscontrolfrontend.usermanagement.UserTest.testDeleteUser", priority = 1)
     public void testDeleteRole() {
         logger.info("{}:{} -> Executing testDeleteRole on ThreadId: {}", projectName, moduleName, Thread.currentThread().getId());
 
@@ -68,7 +68,7 @@ public class RoleTest extends AccessControlFrontend {
         logger.info("Role is deleted");
     }
 
-    @Test(dependsOnMethods = "org.najoa.accesscontrolfrontend.usermanagement.UserTest.testDeleteUser",priority=2)
+    @Test(priority = 2)
     public void testCreateRole() {
         logger.info("{}:{} -> Executing testCreateRole on ThreadId: {}", projectName, moduleName, Thread.currentThread().getId());
 
@@ -100,6 +100,8 @@ public class RoleTest extends AccessControlFrontend {
 
         Assert.assertTrue(rolePage.isRoleExists(), "Test Failed: Failed to create role");
         logger.info("New Role is created");
+        roleTestNode.info("Navigating back");
+        logger.info("Navigating back");
         driver.navigate().back();
     }
 }
