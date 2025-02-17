@@ -2,6 +2,7 @@ package org.najoa.accesscontrolfrontend.usermanagement;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.najoa.configs.EnvManager;
 import org.najoa.configs.LocatorConfig;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
@@ -25,7 +26,7 @@ public class RolePage {
 
     public RolePage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
 
     public void clickAddRoleBtn() {
@@ -60,6 +61,16 @@ public class RolePage {
     }
 
     public boolean isRoleExists() {
+        return !driver.findElements(roleName).isEmpty();
+        /*
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2)); // Disable implicit wait temporarily
+        boolean exists = !driver.findElements(roleName).isEmpty();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(EnvManager.get("IMPLICITLY_WAIT")))); // Restore implicit wait
+        return exists;
+        */
+    }
+
+    public boolean isRoleExistsOld() {
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(roleName));
             return true;

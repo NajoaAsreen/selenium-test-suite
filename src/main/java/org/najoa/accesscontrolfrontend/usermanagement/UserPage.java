@@ -2,6 +2,7 @@ package org.najoa.accesscontrolfrontend.usermanagement;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.najoa.configs.EnvManager;
 import org.najoa.configs.LocatorConfig;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
@@ -86,6 +87,16 @@ public class UserPage {
     }
 
     public boolean isUserExists() {
+        return !driver.findElements(username).isEmpty();
+        /*
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2)); // Disable implicit wait temporarily
+        boolean exists = !driver.findElements(username).isEmpty();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(EnvManager.get("IMPLICITLY_WAIT")))); // Restore implicit wait
+        return exists;
+        */
+    }
+
+    public boolean isUserExistsOld() {
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(username));
             return true;

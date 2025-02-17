@@ -92,7 +92,9 @@ public class UserTest extends AccessControlFrontend {
         ExtentManager.setTestNode(userTestNode);
 
         HomePage homePage = new HomePage(driver);
+
         wait(100);
+
         homePage.clickUser();
         userTestNode.info("Clicked User");
 
@@ -121,7 +123,9 @@ public class UserTest extends AccessControlFrontend {
         userPage.clickUserRoleDropdown();
         userTestNode.info("Clicked Role dropdown button for User");
         logger.info("Clicked Role dropdown button for User");
+
         wait(500);
+
         userPage.selectUserRoleFromDropdown();
         userTestNode.info("Selected Role from dropdown button for User");
         logger.info("Selected Role from dropdown button for User");

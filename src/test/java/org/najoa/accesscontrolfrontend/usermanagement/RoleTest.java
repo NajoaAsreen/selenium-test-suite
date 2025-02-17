@@ -62,7 +62,7 @@ public class RoleTest extends AccessControlFrontend {
         roleTestNode.info("Clicked confirm delete button");
         logger.info("Clicked confirm delete button");
 
-        wait(5000);
+        wait(500);
 
         Assert.assertFalse(rolePage.isRoleExists(), "Test Failed: Role not deleted");
         logger.info("Role is deleted");

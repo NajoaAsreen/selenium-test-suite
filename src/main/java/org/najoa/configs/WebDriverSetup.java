@@ -14,7 +14,7 @@ public class WebDriverSetup {
             WebDriverManager.chromedriver().setup();
             WebDriver driver = new ChromeDriver();
             driver.manage().window().maximize();
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(EnvManager.get("IMPLICITLY_WAIT"))));
             threadLocalDriver.set(driver);
         }
         return threadLocalDriver.get();
