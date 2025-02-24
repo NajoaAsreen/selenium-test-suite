@@ -22,11 +22,11 @@
         </packages>
     </test>
 
-    <!--    <test name="DemoApp Tests">-->
-    <!--        <packages>-->
-    <!--            <package name="org.najoa.demoapp"/> &lt;!&ndash; Package 1 &ndash;&gt;-->
-    <!--        </packages>-->
-    <!--    </test>-->
+        <test name="demoapp2 Tests">
+            <packages>
+                <package name="org.najoa.demoapp2.*"/> <!-- Package 1 -->
+            </packages>
+        </test>
     <!--        <test name="DemoApp Tests">-->
     <!--            <packages>-->
     <!--                <package name="org.najoa.demoapp"/> &lt;!&ndash; Package 1 &ndash;&gt;-->

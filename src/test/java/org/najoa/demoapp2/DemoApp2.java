@@ -38,12 +38,13 @@ public class DemoApp2 {
 
         // Clean up ThreadLocal to avoid stale references
         ExtentManager.removeTestNode();
+        ExtentManager.removeModuleName();
     }
     @AfterTest
     public void tearDown() {
         // Quit WebDriver after all tests are done
         logger.info(EnvManager.get("PROJECT_DEMO_APP2_NAME")+": "+"After Test ThreadId: " + Thread.currentThread().getId());
-
+        ExtentManager.removeProjectName();
         WebDriverSetup.quitDriver();
     }
 }

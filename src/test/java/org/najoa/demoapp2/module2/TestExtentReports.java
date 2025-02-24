@@ -8,12 +8,16 @@ import org.najoa.configs.WebDriverSetup;
 import org.najoa.demoapp2.DemoApp2;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class TestExtentReports extends DemoApp2 {
     private static final Logger logger = LogManager.getLogger(TestExtentReports.class);
     private ExtentTest loginParent;
+    // Define project and module
+    private final String projectName = "DemoApp2";
+    private final String moduleName = "Module 2";
    // private String projectName;
     @BeforeTest
     public void setUp() {
@@ -22,13 +26,15 @@ public class TestExtentReports extends DemoApp2 {
 
         // Initialize WebDriver for each thread
         WebDriverSetup.initializeDriver();
-
-        // Define project and module
-        String projectName = "DemoApp2";
-        String moduleName = "Module 2";
+        ExtentManager.setProjectName(projectName);
 
         // Get parent (module) test
         loginParent = ExtentManager.getModuleParent(projectName, moduleName);
+    }
+
+    @BeforeMethod
+    public void setModuleName(){
+        ExtentManager.setModuleName(moduleName);
     }
 
     @Test
