@@ -56,5 +56,4 @@ public class AccessControlFrontend {
         ExtentManager.removeProjectName();
         WebDriverSetup.quitDriver();
     }
-
 }

@@ -38,7 +38,8 @@ public class ScreenshotListener implements ITestListener {
                 // Add screenshot to report (but without re-logging the failure here)
                 ExtentTest testNode = ExtentManager.getTestNode();
                 if (testNode != null) {
-                    testNode.addScreenCaptureFromPath(filePath.replace(System.getProperty("user.dir") + "/reports/", ""), result.getMethod().getMethodName());
+                    // testNode.addScreenCaptureFromPath(filePath.replace(System.getProperty("user.dir") + "/reports/", ""), result.getMethod().getMethodName());
+                    testNode.addScreenCaptureFromPath(projectName + "/" + moduleName + "/" + result.getMethod().getMethodName() + ".png", result.getMethod().getMethodName());
                 }
             } catch (IOException e) {
                 logger.error("{}:{} -> Error capturing screenshot for test: {} on ThreadId: {}", projectName, moduleName, result.getMethod().getMethodName(), Thread.currentThread().getId(), e);
