@@ -14,6 +14,10 @@ public class ExtentManager {
     // ThreadLocal to manage child nodes for parallel execution
     private static final ThreadLocal<ExtentTest> threadLocalNode = new ThreadLocal<>();
 
+    // ThreadLocal for parallel execution
+    private static final ThreadLocal<String> threadLocalProjectName = new ThreadLocal<>();
+    private static final ThreadLocal<String> threadLocalModuleName = new ThreadLocal<>();
+
     // Initialize and get ExtentReports instance for a specific project
     public static ExtentReports getReportInstance(String projectName) {
         if (!projectReports.containsKey(projectName)) {
@@ -54,5 +58,31 @@ public class ExtentManager {
     // Flush reports for all projects
     public static void flushAllReports() {
         projectReports.values().forEach(ExtentReports::flush);
+    }
+
+    // Set and get project name
+    public static void setProjectName(String projectName) {
+        threadLocalProjectName.set(projectName);
+    }
+
+    public static String getProjectName() {
+        return threadLocalProjectName.get();
+    }
+
+    public static void removeProjectName() {
+        threadLocalProjectName.remove();
+    }
+
+    // Set and get module name
+    public static void setModuleName(String moduleName) {
+        threadLocalModuleName.set(moduleName);
+    }
+
+    public static String getModuleName() {
+        return threadLocalModuleName.get();
+    }
+
+    public static void removeModuleName() {
+        threadLocalModuleName.remove();
     }
 }

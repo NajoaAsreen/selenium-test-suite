@@ -13,6 +13,7 @@
 <suite name="Selenium Test Suite" parallel="tests" thread-count="3">
     <listeners>
         <listener class-name="org.najoa.listeners.ExtentReportListener"/>
+        <listener class-name="org.najoa.listeners.ScreenshotListener"/>
     </listeners>
 
     <test name="Access Control Frontend Tests">

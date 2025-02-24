@@ -10,6 +10,7 @@ import org.najoa.accesscontrolfrontend.AccessControlFrontend;
 import org.najoa.accesscontrolfrontend.home.HomePage;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.SkipException;
@@ -24,7 +25,14 @@ public class RoleTest extends AccessControlFrontend {
     public void setUp() {
         logger.info("{}:{} -> @BeforeTest: Setting Up RoleTest on ThreadId: {}", projectName, moduleName, Thread.currentThread().getId());
         WebDriverSetup.initializeDriver();
+        ExtentManager.setProjectName(projectName);
+
         roleParent = ExtentManager.getModuleParent(projectName, moduleName);
+    }
+
+    @BeforeMethod
+    public void setModuleName(){
+        ExtentManager.setModuleName(moduleName);
     }
 
     @Test(dependsOnMethods = "org.najoa.accesscontrolfrontend.usermanagement.UserTest.testDeleteUser", priority = 1)

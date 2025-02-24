@@ -12,10 +12,12 @@ import org.najoa.accesscontrolfrontend.home.HomePage;
 import org.najoa.accesscontrolfrontend.home.TenantsPage;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.SkipException;
 
+@Test(groups = {"user"})
 public class UserTest extends AccessControlFrontend {
     private static final Logger logger = LogManager.getLogger(UserTest.class);
     private ExtentTest userParent;
@@ -25,7 +27,14 @@ public class UserTest extends AccessControlFrontend {
     public void setUp() {
         logger.info("{}:{} -> @BeforeTest: Setting Up UserTest on ThreadId: {}", projectName, moduleName, Thread.currentThread().getId());
         WebDriverSetup.initializeDriver();
+        ExtentManager.setProjectName(projectName);
+
         userParent = ExtentManager.getModuleParent(projectName, moduleName);
+    }
+
+    @BeforeMethod
+    public void setModuleName(){
+        ExtentManager.setModuleName(moduleName);
     }
 
     @Test(dependsOnGroups = {"login"})

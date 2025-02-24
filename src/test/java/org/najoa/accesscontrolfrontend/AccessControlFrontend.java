@@ -47,11 +47,13 @@ public class AccessControlFrontend {
 
         // Clean up ThreadLocal to avoid stale references
         ExtentManager.removeTestNode();
+        ExtentManager.removeModuleName();
     }
 
     @AfterTest
     public void tearDown() {
         logger.info("{}: After Test ThreadId: {}", EnvManager.get("PROJECT_ACCESS_CONTROL_FE_NAME"), Thread.currentThread().getId());
+        ExtentManager.removeProjectName();
         WebDriverSetup.quitDriver();
     }
 

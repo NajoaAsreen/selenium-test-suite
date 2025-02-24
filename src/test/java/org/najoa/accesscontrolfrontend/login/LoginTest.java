@@ -9,6 +9,7 @@ import org.najoa.configs.WebDriverSetup;
 import org.najoa.accesscontrolfrontend.AccessControlFrontend;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -22,7 +23,14 @@ public class LoginTest extends AccessControlFrontend {
     public void setUp() {
         logger.info("{}:{} -> @BeforeTest: Setting Up LoginTest on ThreadId: {}", projectName, moduleName, Thread.currentThread().getId());
         WebDriverSetup.initializeDriver();
+        ExtentManager.setProjectName(projectName);
+
         loginParent = ExtentManager.getModuleParent(projectName, moduleName);
+    }
+
+    @BeforeMethod
+    public void setModuleName(){
+        ExtentManager.setModuleName(moduleName);
     }
 
     @Test
